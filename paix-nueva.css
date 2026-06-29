@@ -1,0 +1,619 @@
+/* ─── PAIX — Nueva Landing · 2026 ─── */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ─── TOKENS ─── */
+:root {
+  --ice:        #EEF5FB;
+  --glacier:    #C9E0F0;
+  --sky:        #6BAED6;
+  --ocean:      #1A6496;
+  --deep:       #0A2540;
+  --abyss:      #040F1E;
+  --white:      #FFFFFF;
+  --muted:      rgba(255,255,255,0.45);
+  --subtle:     rgba(255,255,255,0.08);
+  --easing:     cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--abyss);
+  color: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 3.5rem;
+  transition: background 0.4s var(--easing), padding 0.4s;
+}
+.nav.scrolled {
+  background: rgba(4, 15, 30, 0.92);
+  backdrop-filter: blur(20px);
+  padding: 1rem 3.5rem;
+  border-bottom: 1px solid var(--subtle);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.75rem; font-weight: 300;
+  letter-spacing: 0.35em;
+  color: var(--white);
+}
+.nav-links {
+  display: flex; gap: 2.5rem; align-items: center;
+}
+.nav-links a {
+  font-size: 0.7rem; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--sky) !important;
+  border: 1px solid rgba(107,174,214,0.4);
+  padding: 0.5rem 1.2rem;
+  border-radius: 2px;
+  transition: all 0.25s !important;
+}
+.nav-cta:hover {
+  background: rgba(107,174,214,0.12) !important;
+  border-color: var(--sky) !important;
+}
+
+/* ─── HERO ─── */
+.hero {
+  height: 100vh; min-height: 700px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  background: radial-gradient(ellipse 120% 80% at 50% 60%, #0D2E4E 0%, #061525 50%, var(--abyss) 100%);
+}
+
+/* Partículas de hielo */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 8%, rgba(200,230,255,0.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 70% 15%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 35%, rgba(200,230,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 70%, rgba(200,230,255,0.4) 0%, transparent 100%),
+    radial-gradient(2px 2px at 55% 90%, rgba(255,255,255,0.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 10% 85%, rgba(200,230,255,0.35) 0%, transparent 100%);
+  pointer-events: none;
+  animation: shimmer 8s ease-in-out infinite alternate;
+}
+@keyframes shimmer {
+  0%   { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* Luz cenital */
+.hero-light {
+  position: absolute;
+  top: -10%; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 500px;
+  background: radial-gradient(ellipse, rgba(107,174,214,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-map-wrap {
+  position: relative; z-index: 2;
+  margin-bottom: 3rem;
+}
+
+/* SVG del mapa antártico */
+#antarctic-map {
+  width: 380px; height: 380px;
+  filter: drop-shadow(0 0 40px rgba(107,174,214,0.25));
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+.continent-fill {
+  fill: rgba(201,224,240,0.15);
+  stroke: rgba(107,174,214,0.6);
+  stroke-width: 0.8;
+  transition: fill 0.4s;
+}
+.continent-fill:hover { fill: rgba(201,224,240,0.22); }
+
+.argentina-sector {
+  fill: rgba(107,174,214,0.2);
+  stroke: var(--sky);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 2;
+  animation: sectorPulse 4s ease-in-out infinite;
+}
+@keyframes sectorPulse {
+  0%,100% { stroke-opacity: 0.7; fill-opacity: 0.2; }
+  50%      { stroke-opacity: 1;   fill-opacity: 0.32; }
+}
+
+.map-dot {
+  fill: var(--sky);
+  filter: drop-shadow(0 0 6px var(--sky));
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%,100% { r: 4; opacity: 1; }
+  50%      { r: 5.5; opacity: 0.8; }
+}
+
+.map-dot-ring {
+  fill: none;
+  stroke: var(--sky);
+  stroke-width: 1;
+  animation: ringExpand 2.5s ease-out infinite;
+}
+@keyframes ringExpand {
+  0%   { r: 6; opacity: 0.8; }
+  100% { r: 18; opacity: 0; }
+}
+
+.map-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 7px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  fill: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+}
+.map-label-main {
+  font-size: 6.5px;
+  fill: var(--sky);
+  letter-spacing: 0.15em;
+}
+
+/* Líneas de latitud */
+.lat-line {
+  fill: none;
+  stroke: rgba(107,174,214,0.15);
+  stroke-width: 0.5;
+}
+
+/* Distancia Ushuaia */
+.distance-line {
+  stroke: rgba(107,174,214,0.5);
+  stroke-width: 0.8;
+  stroke-dasharray: 3 3;
+  animation: dash 3s linear infinite;
+}
+@keyframes dash {
+  to { stroke-dashoffset: -20; }
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center; padding: 0 2rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.65rem; font-weight: 400;
+  letter-spacing: 0.42em; text-transform: uppercase;
+  color: var(--sky); margin-bottom: 1rem;
+  display: block;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4.5rem, 11vw, 9rem);
+  font-weight: 300; line-height: 1;
+  letter-spacing: 0.22em;
+  color: var(--white);
+  text-shadow: 0 0 80px rgba(107,174,214,0.3);
+}
+
+.hero-sub {
+  font-size: clamp(0.6rem, 1.2vw, 0.72rem);
+  font-weight: 300; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--muted);
+  margin-top: 1.2rem;
+}
+
+.hero-divider {
+  width: 1px; height: 44px;
+  background: linear-gradient(to bottom, var(--sky), transparent);
+  margin: 2rem auto;
+}
+
+.hero-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-weight: 300; color: rgba(255,255,255,0.55);
+  max-width: 480px; line-height: 1.65; margin: 0 auto;
+}
+
+.scroll-hint {
+  position: absolute; bottom: 2.5rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 0.6rem;
+  font-size: 0.58rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--muted);
+}
+.scroll-bar {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--sky), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%,100% { opacity: 0.4; transform: scaleY(0.8); }
+  50%      { opacity: 1; transform: scaleY(1); }
+}
+
+/* ─── CIFRAS FLOTANTES ─── */
+.proximity {
+  background: linear-gradient(180deg, var(--abyss) 0%, #061A2E 100%);
+  padding: 6rem 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  border-top: 1px solid var(--subtle);
+  border-bottom: 1px solid var(--subtle);
+}
+.prox-item {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid var(--subtle);
+  transition: background 0.3s;
+}
+.prox-item:last-child { border-right: none; }
+.prox-item:hover { background: rgba(107,174,214,0.04); }
+.prox-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem; font-weight: 300; line-height: 1;
+  color: var(--sky);
+}
+.prox-label {
+  font-size: 0.68rem; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); margin-top: 0.6rem;
+  line-height: 1.6;
+}
+.prox-src {
+  font-size: 0.58rem; color: rgba(255,255,255,0.22);
+  margin-top: 0.4rem; font-style: italic;
+}
+
+/* ─── INTRO / POSICIÓN ─── */
+.intro {
+  padding: 8rem 3.5rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8rem;
+  align-items: center;
+  background: var(--abyss);
+}
+.intro-label {
+  font-size: 0.62rem; font-weight: 400;
+  letter-spacing: 0.38em; text-transform: uppercase;
+  color: var(--sky); margin-bottom: 1.2rem; display: block;
+}
+.intro-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 3.5vw, 3rem);
+  font-weight: 300; line-height: 1.25; color: var(--white);
+  margin-bottom: 1.5rem;
+}
+.intro-body {
+  font-size: 0.92rem; font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.9; max-width: 520px;
+}
+.intro-rule {
+  width: 36px; height: 1px;
+  background: var(--sky); margin: 1.8rem 0;
+}
+.intro-body + .intro-body { margin-top: 1.2rem; }
+
+.intro-visual {
+  position: relative;
+}
+.intro-img {
+  width: 100%; aspect-ratio: 3/4;
+  object-fit: cover;
+  filter: brightness(0.55) saturate(0.8);
+  display: block;
+}
+.intro-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(4,15,30,0.6) 0%, transparent 60%);
+}
+.intro-img-caption {
+  position: absolute; bottom: 1.5rem; left: 1.5rem;
+  font-size: 0.6rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(255,255,255,0.4);
+}
+
+/* ─── MARCA ─── */
+.marca {
+  background: var(--ice);
+  padding: 8rem 3.5rem;
+}
+.marca .intro-label { color: var(--ocean); }
+.marca .intro-heading { color: var(--deep); }
+.marca .intro-body { color: #4a5568; }
+.marca .intro-rule { background: var(--ocean); }
+
+.marca-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 0; margin-top: 4rem;
+  border: 1px solid #dde3ea;
+}
+.marca-card {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid #dde3ea;
+  transition: background 0.3s;
+}
+.marca-card:last-child { border-right: none; }
+.marca-card:hover { background: rgba(26,100,150,0.04); }
+.marca-card-num {
+  font-size: 0.6rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--ocean);
+  margin-bottom: 1.5rem; display: block;
+}
+.marca-card-word {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem; font-weight: 300;
+  color: var(--ocean); line-height: 1;
+  margin-bottom: 0.8rem; display: block;
+}
+.marca-card-head {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 400;
+  color: var(--deep); margin-bottom: 1rem;
+}
+.marca-card-body {
+  font-size: 0.85rem; font-weight: 300;
+  color: #5a6878; line-height: 1.85;
+}
+
+/* ─── VECTORES ─── */
+.vectores {
+  background: #061525;
+  padding: 8rem 3.5rem;
+}
+
+.section-header {
+  display: flex; align-items: flex-end;
+  justify-content: space-between; margin-bottom: 4rem;
+}
+.section-head-left {}
+.section-count {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem; font-weight: 300;
+  color: rgba(107,174,214,0.1);
+  line-height: 1;
+}
+
+.vectors-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.04);
+}
+.v-card {
+  position: relative; overflow: hidden;
+  min-height: 380px; cursor: default;
+  background: var(--abyss);
+}
+.v-img {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transform: scale(1.05);
+  transition: transform 0.7s var(--easing);
+}
+.v-card:hover .v-img { transform: scale(1.12); }
+.v-grad {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(4,15,30,0.97) 0%,
+    rgba(4,15,30,0.6) 50%,
+    rgba(4,15,30,0.2) 100%
+  );
+  transition: background 0.4s;
+}
+.v-card:hover .v-grad {
+  background: linear-gradient(
+    to top,
+    rgba(4,15,30,1) 40%,
+    rgba(4,15,30,0.7) 70%,
+    rgba(4,15,30,0.3) 100%
+  );
+}
+.v-body {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 2rem 1.8rem;
+}
+.v-num {
+  font-size: 0.58rem; letter-spacing: 0.32em;
+  text-transform: uppercase; color: var(--sky);
+  margin-bottom: 0.3rem;
+}
+.v-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; font-weight: 400;
+  color: var(--white); margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+.v-desc {
+  font-size: 0.77rem; font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.65;
+  max-height: 0; overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s var(--easing), opacity 0.35s;
+}
+.v-card:hover .v-desc { max-height: 160px; opacity: 1; }
+.v-tag {
+  display: block; margin-top: 0.8rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid rgba(107,174,214,0.2);
+  font-size: 0.58rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(107,174,214,0.6);
+}
+
+/* ─── NORMATIVA ─── */
+.normativa {
+  padding: 8rem 3.5rem;
+  background: var(--abyss);
+}
+.law-grid {
+  display: grid; grid-template-columns: repeat(2,1fr);
+  gap: 1.5rem; margin-top: 4rem;
+}
+.law-card {
+  padding: 2.5rem 2.5rem;
+  border: 1px solid var(--subtle);
+  transition: border-color 0.3s, background 0.3s;
+  position: relative; overflow: hidden;
+}
+.law-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 2px; height: 0;
+  background: var(--sky);
+  transition: height 0.4s var(--easing);
+}
+.law-card:hover::before { height: 100%; }
+.law-card:hover {
+  border-color: rgba(107,174,214,0.3);
+  background: rgba(107,174,214,0.03);
+}
+.law-tag {
+  font-size: 0.58rem; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--sky);
+  margin-bottom: 0.8rem; display: block;
+}
+.law-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem; font-weight: 400;
+  color: var(--white); margin-bottom: 1rem;
+}
+.law-body {
+  font-size: 0.84rem; font-weight: 300;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.8;
+}
+.law-quote {
+  margin-top: 1.2rem; padding: 1rem 1.2rem;
+  background: rgba(107,174,214,0.08);
+  border-left: 2px solid rgba(107,174,214,0.4);
+  font-style: italic; font-size: 0.82rem;
+  color: rgba(255,255,255,0.6); line-height: 1.65;
+}
+
+/* ─── CONVOCATORIA ─── */
+.call {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 600px;
+}
+.call-text {
+  background: #040D1A;
+  padding: 8rem 5rem 8rem 3.5rem;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.call-img-wrap {
+  position: relative; overflow: hidden;
+}
+.call-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.45) saturate(0.7);
+  display: block;
+  transition: transform 8s var(--easing);
+}
+.call-img-wrap:hover .call-img { transform: scale(1.04); }
+.call-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, #040D1A 0%, transparent 35%);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 5rem 3.5rem 3rem;
+  border-top: 1px solid var(--subtle);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end; gap: 4rem;
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 6rem; font-weight: 300;
+  color: rgba(255,255,255,0.04);
+  letter-spacing: 0.14em; line-height: 1;
+}
+.footer-info {
+  text-align: right;
+}
+.footer-info-main {
+  font-size: 0.8rem; font-weight: 400;
+  color: rgba(255,255,255,0.5);
+  line-height: 2;
+}
+.footer-info-main strong { color: var(--white); font-weight: 500; }
+.footer-info-main a {
+  color: var(--sky); text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: opacity 0.2s;
+}
+.footer-info-main a:hover { opacity: 0.7; }
+.footer-legal {
+  margin-top: 1.5rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--subtle);
+  font-size: 0.58rem;
+  color: rgba(255,255,255,0.18);
+  letter-spacing: 0.08em; line-height: 1.8;
+  text-align: right;
+}
+
+/* ─── FADE-IN ON SCROLL ─── */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.7s var(--easing), transform 0.7s var(--easing);
+}
+.reveal.visible {
+  opacity: 1; transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1100px) {
+  .vectors-grid { grid-template-columns: repeat(2,1fr); }
+  .proximity { grid-template-columns: repeat(2,1fr); }
+  .intro { grid-template-columns: 1fr; gap: 4rem; }
+  .intro-visual { max-width: 520px; }
+}
+@media (max-width: 768px) {
+  .nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  section, .normativa, .vectores, .marca, .intro { padding: 5rem 1.5rem; }
+  .proximity { padding: 4rem 1.5rem; grid-template-columns: 1fr 1fr; }
+  .marca-grid { grid-template-columns: 1fr; }
+  .law-grid { grid-template-columns: 1fr; }
+  .call { grid-template-columns: 1fr; }
+  .call-img-wrap { min-height: 300px; }
+  .call-text { padding: 5rem 1.5rem; }
+  .footer { padding: 4rem 1.5rem 2rem; grid-template-columns: 1fr; }
+  .footer-info, .footer-legal { text-align: left; }
+  #antarctic-map { width: 280px; height: 280px; }
+  .vectors-grid { grid-template-columns: 1fr; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
