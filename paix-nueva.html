@@ -24,89 +24,106 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-light"></div>
+  <div class="hero-aurora"></div>
 
-  <!-- Mapa SVG animado del continente antártico -->
-  <div class="hero-map-wrap">
-    <svg id="antarctic-map" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- MAPA INTERACTIVO SVG -->
+  <div class="map-container" id="mapContainer">
+    <svg id="antarctic-map" viewBox="0 0 460 400" xmlns="http://www.w3.org/2000/svg">
 
-      <!-- Líneas de latitud -->
-      <circle cx="200" cy="200" r="180" class="lat-line"/>
-      <circle cx="200" cy="200" r="140" class="lat-line"/>
-      <circle cx="200" cy="200" r="100" class="lat-line"/>
-      <circle cx="200" cy="200" r="60"  class="lat-line"/>
+      <!-- Latitudes -->
+      <circle cx="230" cy="210" r="170" class="lat"/>
+      <circle cx="230" cy="210" r="130" class="lat"/>
+      <circle cx="230" cy="210" r="90"  class="lat"/>
+      <circle cx="230" cy="210" r="50"  class="lat"/>
 
-      <!-- Líneas de longitud sutiles -->
-      <line x1="200" y1="20" x2="200" y2="380" stroke="rgba(107,174,214,0.08)" stroke-width="0.5"/>
-      <line x1="20" y1="200" x2="380" y2="200" stroke="rgba(107,174,214,0.08)" stroke-width="0.5"/>
-      <line x1="73" y1="73" x2="327" y2="327" stroke="rgba(107,174,214,0.06)" stroke-width="0.5"/>
-      <line x1="327" y1="73" x2="73" y2="327" stroke="rgba(107,174,214,0.06)" stroke-width="0.5"/>
+      <!-- Meridianos -->
+      <line x1="230" y1="40"  x2="230" y2="380" class="merid" stroke="rgba(91,164,207,0.06)" stroke-width="0.5"/>
+      <line x1="60"  y1="210" x2="400" y2="210" class="merid" stroke="rgba(91,164,207,0.06)" stroke-width="0.5"/>
+      <line x1="109" y1="89"  x2="351" y2="331" class="merid" stroke="rgba(91,164,207,0.04)" stroke-width="0.5"/>
+      <line x1="351" y1="89"  x2="109" y2="331" class="merid" stroke="rgba(91,164,207,0.04)" stroke-width="0.5"/>
 
-      <!-- Continente antártico (simplificado) -->
-      <path class="continent-fill" d="
-        M200,30
-        C230,32 255,38 278,52
-        C302,66 318,85 332,108
-        C346,130 352,155 350,182
-        C348,200 342,218 334,232
-        C326,246 316,258 308,268
-        C318,280 322,295 316,310
-        C310,325 296,334 280,338
-        C264,342 248,340 235,332
-        C222,324 214,312 210,298
-        C200,305 188,308 176,306
-        C164,304 154,296 148,284
-        C142,272 142,258 148,246
-        C136,238 126,226 120,212
-        C114,198 112,182 116,166
-        C120,150 130,136 142,124
-        C154,112 168,104 182,100
-        C178,84 180,66 190,52
-        C196,42 198,34 200,30 Z
+      <!-- Continente antártico principal -->
+      <path class="continent-main" d="
+        M230,68
+        C258,70 284,78 306,95
+        C332,114 348,140 356,168
+        C364,196 360,225 348,248
+        C340,264 328,278 318,290
+        C328,302 334,320 326,336
+        C318,352 302,362 284,366
+        C266,370 248,366 236,356
+        C224,346 216,332 212,316
+        C202,322 190,325 178,322
+        C166,319 156,310 150,296
+        C144,282 144,266 152,252
+        C138,242 126,228 120,212
+        C114,196 112,178 118,160
+        C124,142 136,126 150,114
+        C164,102 180,94 196,90
+        C192,76 194,60 204,50
+        C212,44 218,62 230,68 Z
       "/>
 
-      <!-- Sector argentino (meridianos 25°O a 74°O aproximados) -->
-      <path class="argentina-sector" d="
-        M200,200
-        L200,30
-        C215,31 228,34 240,38
-        C265,47 285,60 300,78
-        C318,98 328,122 332,148
-        C334,162 334,178 330,192
-        L200,200 Z
-      " opacity="0.8"/>
+      <!-- Sector argentino (25°O – 74°O desde el polo) -->
+      <path class="arg-sector" d="
+        M230,210
+        L230,68
+        C248,69 266,74 282,82
+        C305,94 322,114 334,136
+        C344,156 350,178 352,200
+        C354,218 350,238 342,252
+        L230,210 Z
+      "/>
 
-      <!-- Label sector -->
-      <text x="265" y="105" class="map-label-main" transform="rotate(-15, 265, 105)">Sector Arg.</text>
+      <!-- Etiqueta "Sector Arg." -->
+      <text x="295" y="128" class="ml" font-size="7.5" fill="rgba(91,164,207,0.65)"
+            transform="rotate(-20,295,128)">Sector Arg.</text>
 
-      <!-- Punto Ushuaia (arriba, fuera del continente) -->
-      <circle cx="185" cy="52" r="4"  class="map-dot"/>
-      <circle cx="185" cy="52" r="6"  class="map-dot-ring"/>
-      <circle cx="185" cy="52" r="10" class="map-dot-ring" style="animation-delay:0.5s"/>
+      <!-- ── USHUAIA ── más arriba, fuera del continente -->
+      <!-- Punto principal -->
+      <circle cx="218" cy="58" r="5"  class="dot-ushuaia"/>
+      <circle cx="218" cy="58" r="7"  class="dot-ring1"/>
+      <circle cx="218" cy="58" r="9"  class="dot-ring2"/>
 
-      <!-- Línea de distancia Ushuaia → Antártida -->
-      <line x1="185" y1="60" x2="185" y2="100" class="distance-line"/>
+      <!-- Label USHUAIA — grande y bien visible -->
+      <text x="228" y="54" class="ml" font-size="9" font-weight="700"
+            fill="rgba(255,255,255,0.85)" letter-spacing="2">USHUAIA</text>
+      <text x="228" y="65" class="ml" font-size="6"
+            fill="rgba(91,164,207,0.7)" letter-spacing="1">Tierra del Fuego · Argentina</text>
 
-      <!-- Labels -->
-      <text x="192" y="50" class="map-label" fill="rgba(255,255,255,0.7)" font-size="6.5">USHUAIA</text>
-      <text x="150" y="210" class="map-label" fill="rgba(255,255,255,0.3)" font-size="6">ANTÁRTIDA</text>
+      <!-- Línea distancia hasta el continente -->
+      <line x1="218" y1="64" x2="218" y2="95" class="dist-line"/>
 
-      <!-- Etiqueta 1.000 km -->
-      <text x="192" y="82" class="map-label" fill="rgba(107,174,214,0.6)" font-size="5.5">≈ 1.000 km</text>
+      <!-- Etiqueta distancia -->
+      <rect x="185" y="76" width="66" height="13" rx="2"
+            fill="rgba(91,164,207,0.12)" stroke="rgba(91,164,207,0.2)" stroke-width="0.5"/>
+      <text x="218" y="85" class="ml" font-size="6.5" font-weight="700"
+            fill="var(--sky)" text-anchor="middle">≈ 1.000 km</text>
 
-      <!-- Punto polo sur -->
-      <circle cx="200" cy="200" r="3" fill="rgba(107,174,214,0.5)" stroke="var(--sky)" stroke-width="0.8"/>
-      <text x="206" y="204" class="map-label" font-size="5.5">Polo Sur</text>
+      <!-- Polo Sur -->
+      <circle cx="230" cy="210" r="3.5" fill="rgba(91,164,207,0.6)"
+              stroke="var(--sky)" stroke-width="1"/>
+      <text x="238" y="214" class="ml" font-size="6" fill="rgba(255,255,255,0.4)">Polo Sur</text>
+
+      <!-- Label ANTÁRTIDA -->
+      <text x="155" y="220" class="ml" font-size="7" fill="rgba(255,255,255,0.18)"
+            letter-spacing="2">ANTÁRTIDA</text>
+
+      <!-- Línea latitud etiqueta -->
+      <text x="72" y="178" class="ml" font-size="5.5" fill="rgba(91,164,207,0.3)">60° S</text>
+      <text x="96" y="140" class="ml" font-size="5.5" fill="rgba(91,164,207,0.25)">70° S</text>
+      <text x="128" y="118" class="ml" font-size="5.5" fill="rgba(91,164,207,0.2)">80° S</text>
+
     </svg>
   </div>
 
-  <!-- Texto del hero -->
-  <div class="hero-content">
+  <!-- Texto hero -->
+  <div class="hero-text">
     <span class="hero-eyebrow">Ushuaia · Antártida · Argentina</span>
     <div class="hero-title">PAIX</div>
     <div class="hero-sub">Plataforma Antártica Internacional Ushuaia</div>
     <div class="hero-divider"></div>
-    <p class="hero-tagline">El hub más cercano al continente más remoto. Donde la geografía, la ley y la historia convergen.</p>
+    <p class="hero-tagline">El hub más cercano al continente más remoto.<br>Donde la geografía, la ley y la historia convergen.</p>
   </div>
 
   <div class="scroll-hint">
@@ -115,95 +132,97 @@
   </div>
 </section>
 
-<!-- CIFRAS -->
-<div class="proximity" id="posicion">
-  <div class="prox-item reveal">
-    <div class="prox-num">1.000 km</div>
-    <div class="prox-label">de Ushuaia a la<br>Península Antártica</div>
-    <div class="prox-src">El hub más cercano del mundo</div>
+<!-- STATS -->
+<div class="stats" id="posicion">
+  <div class="stat reveal">
+    <div class="stat-n">1.000 km</div>
+    <div class="stat-l">Ushuaia a la<br>Península Antártica</div>
+    <div class="stat-s">El hub más cercano del mundo</div>
   </div>
-  <div class="prox-item reveal reveal-delay-1">
-    <div class="prox-num">+122K</div>
-    <div class="prox-label">visitantes antárticos<br>temporada 2023–24</div>
-    <div class="prox-src">Fuente: IAATO Annual Report</div>
+  <div class="stat reveal d1">
+    <div class="stat-n">+122K</div>
+    <div class="stat-l">Visitantes antárticos<br>temporada 2023–24</div>
+    <div class="stat-s">Fuente: IAATO Annual Report</div>
   </div>
-  <div class="prox-item reveal reveal-delay-2">
-    <div class="prox-num">30+</div>
-    <div class="prox-label">países con programas<br>antárticos activos</div>
-    <div class="prox-src">Sistema del Tratado Antártico</div>
+  <div class="stat reveal d2">
+    <div class="stat-n">30+</div>
+    <div class="stat-l">Países con programas<br>antárticos activos</div>
+    <div class="stat-s">Sistema del Tratado Antártico</div>
   </div>
-  <div class="prox-item reveal reveal-delay-3">
-    <div class="prox-num">2004</div>
-    <div class="prox-label">año en que la ley ordenó<br>crear el Área Antártica Int.</div>
-    <div class="prox-src">Ley Provincial TDF 640/04 Art. 2.4</div>
+  <div class="stat reveal d3">
+    <div class="stat-n">2004</div>
+    <div class="stat-l">Año en que la ley ordenó<br>crear el Área Antártica Int.</div>
+    <div class="stat-s">Ley Provincial TDF 640/04 Art. 2.4</div>
   </div>
 </div>
 
-<!-- INTRO / POSICIÓN -->
+<!-- INTRO -->
 <section class="intro">
   <div>
-    <span class="intro-label reveal">La Posición</span>
-    <h2 class="intro-heading reveal reveal-delay-1">La distancia<br>más corta.</h2>
-    <div class="intro-rule reveal reveal-delay-2"></div>
-    <p class="intro-body reveal reveal-delay-2">
-      La Dirección Nacional del Antártico, el Comando Conjunto Antártico, las dependencias de Cancillería con incumbencia antártica: todas planifican y deciden desde Buenos Aires. A 3.000 kilómetros del único lugar del país desde donde se puede tocar, abastecer y apoyar el continente blanco.
+    <span class="section-tag reveal">La Posición</span>
+    <h2 class="section-h reveal d1">La distancia<br>más corta.</h2>
+    <div class="section-rule reveal d1"></div>
+    <p class="section-body reveal d2">
+      La Dirección Nacional del Antártico, el Comando Conjunto Antártico, las dependencias de Cancillería: todas planifican desde Buenos Aires. A 3.000 kilómetros del único lugar del país desde donde se puede abastecer el continente blanco.
     </p>
-    <p class="intro-body reveal reveal-delay-3" style="margin-top:1.2rem">
-      PAIX es la plataforma desde la cual ejecutar lo que la geografía, la historia y veinte años de legislación ya decidieron: Ushuaia es la puerta de entrada a la Antártida.
+    <p class="section-body reveal d3" style="margin-top:1.2rem">
+      PAIX es la plataforma desde la cual ejecutar lo que veinte años de legislación ya decidieron: Ushuaia es la puerta de entrada a la Antártida.
     </p>
   </div>
-  <div class="intro-visual reveal reveal-delay-2">
-    <img class="intro-img" src="Fotos/azorko-ushuaia-4073067_1920.jpg" alt="Ushuaia desde el canal Beagle">
-    <div class="intro-img-overlay"></div>
-    <div class="intro-img-caption">Canal Beagle · Ushuaia, Tierra del Fuego</div>
+  <div class="intro-vis reveal d1">
+    <div class="intro-vis-grid"></div>
+    <div class="intro-vis-text">
+      ATA<br>NTÁ<br>RTI<br>DA
+    </div>
+    <div class="intro-vis-label">Canal Beagle · Ushuaia, Tierra del Fuego</div>
   </div>
 </section>
 
 <!-- MARCA -->
 <section class="marca" id="marca">
-  <span class="intro-label reveal">La Marca</span>
-  <h2 class="intro-heading reveal reveal-delay-1" style="color:var(--deep)">Tres lecturas.<br>Una sola palabra.</h2>
-  <div class="intro-rule reveal reveal-delay-1" style="background:var(--ocean)"></div>
-  <p class="intro-body reveal reveal-delay-2" style="color:#4a5568;max-width:580px">
+  <span class="section-tag reveal">La Marca</span>
+  <h2 class="section-h reveal d1">Tres lecturas.<br>Una sola palabra.</h2>
+  <div class="section-rule reveal d1" style="background:var(--ocean)"></div>
+  <p class="section-body reveal d2" style="color:#4a5568">
     PAIX no es solo un acrónimo. Es un nombre construido en capas: cada una con su propia lógica, todas convergentes en el mismo significado.
   </p>
 
-  <div class="marca-grid" style="margin-top:4rem">
+  <div class="marca-grid">
     <div class="marca-card reveal">
-      <span class="marca-card-num">Capa I — Acrónimo</span>
-      <span class="marca-card-word">P·A·I·X</span>
-      <div class="marca-card-head">Plataforma Antártica Internacional U·shuaia</div>
-      <p class="marca-card-body">La X representa a Ushuaia a través de la tradición ortográfica del español colonial, en la que los topónimos de origen indígena se escribían con esa letra: México, Oaxaca, Xochimilco. El nombre Ushuaia proviene del Yagán —la lengua del pueblo que habitó el extremo austral.</p>
+      <span class="mc-num">Capa I — Acrónimo</span>
+      <span class="mc-word">P·A·I·X</span>
+      <div class="mc-head">Plataforma Antártica Internacional U·shuaia</div>
+      <p class="mc-body">La X representa a Ushuaia a través de la tradición ortográfica del español colonial, en la que los topónimos de origen indígena se escribían con esa letra: México, Oaxaca, Xochimilco. El nombre Ushuaia proviene del Yagán —la lengua del pueblo que habitó el extremo austral.</p>
     </div>
-    <div class="marca-card reveal reveal-delay-1">
-      <span class="marca-card-num">Capa II — Semántica</span>
-      <span class="marca-card-word" style="font-style:italic">paix</span>
-      <div class="marca-card-head">Paz, en el idioma de la diplomacia</div>
-      <p class="marca-card-body"><em>Paix</em> es el término francés para paz. El idioma de la diplomacia internacional. Una referencia directa al espíritu del Tratado Antártico: el acuerdo de cooperación pacífica entre naciones más longevo de la historia moderna, firmado en 1959.</p>
+    <div class="marca-card reveal d1">
+      <span class="mc-num">Capa II — Semántica</span>
+      <span class="mc-word" style="font-style:italic">paix</span>
+      <div class="mc-head">Paz, en el idioma de la diplomacia</div>
+      <p class="mc-body"><em>Paix</em> es el término francés para paz. El idioma de la diplomacia internacional. Una referencia directa al espíritu del Tratado Antártico: el acuerdo de cooperación pacífica entre naciones más longevo de la historia moderna, firmado en 1959.</p>
     </div>
-    <div class="marca-card reveal reveal-delay-2">
-      <span class="marca-card-num">Capa III — Raíz</span>
-      <span class="marca-card-word">pax</span>
-      <div class="marca-card-head">La raíz que todas las lenguas reconocen</div>
-      <p class="marca-card-body"><em>Pax</em>, en latín, es la paz que todas las lenguas del sistema antártico comprenden sin traducción. Cuando alguien pregunta qué significa PAIX, la respuesta ya es parte del discurso del proyecto.</p>
+    <div class="marca-card reveal d2">
+      <span class="mc-num">Capa III — Raíz</span>
+      <span class="mc-word">pax</span>
+      <div class="mc-head">La raíz que todas las lenguas reconocen</div>
+      <p class="mc-body"><em>Pax</em>, en latín, es la paz que todas las lenguas del sistema antártico comprenden sin traducción. Cuando alguien pregunta qué significa PAIX, la respuesta ya es parte del discurso del proyecto.</p>
     </div>
   </div>
 </section>
 
 <!-- VECTORES -->
 <section class="vectores" id="vectores">
-  <div class="section-header">
-    <div class="section-head-left">
-      <span class="intro-label reveal">Vectores de Desarrollo</span>
-      <h2 class="intro-heading reveal reveal-delay-1">Ocho vectores.<br>Un sistema.</h2>
+  <div class="v-header">
+    <div>
+      <span class="section-tag reveal">Vectores de Desarrollo</span>
+      <h2 class="section-h reveal d1">Ocho vectores.<br>Un sistema.</h2>
     </div>
-    <div class="section-count reveal">08</div>
+    <div class="v-big-num reveal">08</div>
   </div>
 
-  <div class="vectors-grid">
-    <div class="v-card">
-      <div class="v-img" style="background-image:url('Fotos/10871402-icebreaker-3889864.jpg')"></div>
-      <div class="v-grad"></div>
+  <div class="v-grid">
+    <div class="v-card v-card-1">
+      <div class="v-deco-num">01</div>
+      <div class="v-grad-inner"></div>
       <div class="v-body">
         <div class="v-num">Vector I</div>
         <div class="v-name">Logístico</div>
@@ -211,9 +230,9 @@
         <span class="v-tag">Fideicomiso Polo Logístico · Ley 640/04 Art. 2.3</span>
       </div>
     </div>
-    <div class="v-card">
-      <div class="v-img" style="background-image:url('Fotos/10871402-antarctica-3883212_1920.jpg')"></div>
-      <div class="v-grad"></div>
+    <div class="v-card v-card-2">
+      <div class="v-deco-num">02</div>
+      <div class="v-grad-inner"></div>
       <div class="v-body">
         <div class="v-num">Vector II</div>
         <div class="v-name">Científico</div>
@@ -221,9 +240,9 @@
         <span class="v-tag">CADIC · CONICET · Tratado Antártico</span>
       </div>
     </div>
-    <div class="v-card">
-      <div class="v-img" style="background-image:url('Fotos/12237115-patagonia-4207899_1920.jpg')"></div>
-      <div class="v-grad"></div>
+    <div class="v-card v-card-3">
+      <div class="v-deco-num">03</div>
+      <div class="v-grad-inner"></div>
       <div class="v-body">
         <div class="v-num">Vector III</div>
         <div class="v-name">Educativo y Académico</div>
@@ -231,9 +250,9 @@
         <span class="v-tag">UNTDF · Ley 585/03 Art. 10</span>
       </div>
     </div>
-    <div class="v-card">
-      <div class="v-img" style="background-image:url('Fotos/10871402-helicopter-5602410_1920.jpg')"></div>
-      <div class="v-grad"></div>
+    <div class="v-card v-card-4">
+      <div class="v-deco-num">04</div>
+      <div class="v-grad-inner"></div>
       <div class="v-body">
         <div class="v-num">Vector IV</div>
         <div class="v-name">Militar y Soberanía</div>
@@ -241,9 +260,9 @@
         <span class="v-tag">Armada Argentina · COCOANTAR · Base Petrel</span>
       </div>
     </div>
-    <div class="v-card">
-      <div class="v-img" style="background-image:url('Fotos/jorono-international-2690837_1920.jpg')"></div>
-      <div class="v-grad"></div>
+    <div class="v-card v-card-5">
+      <div class="v-deco-num">05</div>
+      <div class="v-grad-inner"></div>
       <div class="v-body">
         <div class="v-num">Vector V</div>
         <div class="v-name">Institucional y Comercial</div>
@@ -251,33 +270,33 @@
         <span class="v-tag">Cancillería · Puerto Ushuaia · RAPAL</span>
       </div>
     </div>
-    <div class="v-card">
-      <div class="v-img" style="background-image:url('Fotos/michelle2214-drake-passage-2680622_1920.jpg')"></div>
-      <div class="v-grad"></div>
+    <div class="v-card v-card-6">
+      <div class="v-deco-num">06</div>
+      <div class="v-grad-inner"></div>
       <div class="v-body">
         <div class="v-num">Vector VI</div>
         <div class="v-name">Internacional y Diplomático</div>
-        <div class="v-desc">Ushuaia como sede de coordinación regional: anfitrión de reuniones del sistema del Tratado Antártico y nodo de referencia para programas sin infraestructura propia.</div>
+        <div class="v-desc">Ushuaia como sede de coordinación regional: anfitrión de reuniones del sistema del Tratado Antártico y nodo para programas sin infraestructura propia.</div>
         <span class="v-tag">Tratado Antártico · RAPAL · 30+ países</span>
       </div>
     </div>
-    <div class="v-card">
-      <div class="v-img" style="background-image:url('Fotos/publicdomainpictures-berg-17086_1920.jpg')"></div>
-      <div class="v-grad"></div>
+    <div class="v-card v-card-7">
+      <div class="v-deco-num">07</div>
+      <div class="v-grad-inner"></div>
       <div class="v-body">
         <div class="v-num">Vector VII</div>
         <div class="v-name">Ambiental y Sustentabilidad</div>
-        <div class="v-desc">Gestión de última milla para operaciones polares. Operar desde Ushuaia no es solo más eficiente — es más responsable.</div>
+        <div class="v-desc">Gestión de última milla para operaciones polares. Operar desde Ushuaia no es solo más eficiente — es más responsable con el ecosistema más frágil del planeta.</div>
         <span class="v-tag">Protocolo de Madrid · Gestión última milla</span>
       </div>
     </div>
-    <div class="v-card">
-      <div class="v-img" style="background-image:url('Fotos/peter_mcnally-ship-7773072_1920.jpg')"></div>
-      <div class="v-grad"></div>
+    <div class="v-card v-card-8">
+      <div class="v-deco-num">08</div>
+      <div class="v-grad-inner"></div>
       <div class="v-body">
         <div class="v-num">Vector VIII</div>
         <div class="v-name">Turístico y Expedicionario</div>
-        <div class="v-desc">Más de 122.000 visitantes en la temporada 2023-24 (IAATO). PAIX propone que la IAATO establezca en Ushuaia su sede regional de coordinación operativa.</div>
+        <div class="v-desc">Más de 122.000 visitantes en la temporada 2023-24. PAIX propone que la IAATO establezca en Ushuaia su sede regional de coordinación operativa.</div>
         <span class="v-tag">IAATO · +122.000 visitantes/temporada</span>
       </div>
     </div>
@@ -286,79 +305,67 @@
 
 <!-- NORMATIVA -->
 <section class="normativa" id="normativa">
-  <span class="intro-label reveal">Marco Normativo</span>
-  <h2 class="intro-heading reveal reveal-delay-1">La ley lo ordena<br>desde 2004.</h2>
-  <div class="intro-rule reveal reveal-delay-1"></div>
-  <p class="intro-body reveal reveal-delay-2">
-    PAIX materializa el mandato legislativo que la Provincia de Tierra del Fuego estableció hace dos décadas. No es una propuesta. No es una aspiración. Es un encargo pendiente de ejecución.
+  <span class="section-tag reveal">Marco Normativo</span>
+  <h2 class="section-h reveal d1">La ley lo ordena<br>desde 2004.</h2>
+  <div class="section-rule reveal d1"></div>
+  <p class="section-body reveal d2">
+    PAIX materializa un mandato legislativo con veinte años de antigüedad. No es una propuesta. No es una aspiración. Es un encargo pendiente de ejecución.
   </p>
 
   <div class="law-grid">
     <div class="law-card reveal">
       <span class="law-tag">Ley Nacional 23.775/90</span>
       <div class="law-title">Una Provincia Bicontinental</div>
-      <p class="law-body">La provincialización de Tierra del Fuego estableció un territorio que incluye el sector antártico argentino entre los meridianos 25° y 74° Oeste, hasta el Polo Sur. Argentina es el único país del mundo con una provincia que gobierna simultáneamente territorio americano y antártico.</p>
+      <p class="law-body">La provincialización de Tierra del Fuego estableció un territorio que incluye el sector antártico argentino entre los meridianos 25° y 74° Oeste hasta el Polo Sur. Argentina es el único país del mundo con una provincia que gobierna simultáneamente territorio americano y antártico.</p>
     </div>
-    <div class="law-card reveal reveal-delay-1">
+    <div class="law-card reveal d1">
       <span class="law-tag">Ley Provincial 585/03 — Política Antártica</span>
       <div class="law-title">El mandato de servir</div>
-      <p class="law-body">Define como actividad antártica provincial toda operación que utilice TDF como base de apoyo. Obliga a la Provincia a promover servicios antárticos (Art. 8) y a propiciar un complejo integrado multimodal (Art. 9).</p>
+      <p class="law-body">Obliga a la Provincia a promover servicios antárticos (Art. 8) y a propiciar un complejo integrado multimodal (Art. 9). Los convenios con operadores antárticos aprobados por la Legislatura adquieren fuerza de Ley (Art. 15).</p>
       <div class="law-quote">"...propiciar el desarrollo de un complejo integrado y multimodal para la actividad antártica." — Art. 9</div>
     </div>
-    <div class="law-card reveal reveal-delay-2">
+    <div class="law-card reveal d2">
       <span class="law-tag">Ley Provincial 640/04 — Ushuaia Conexión Óptima</span>
       <div class="law-title">El nombre ya existía</div>
-      <p class="law-body">Su Art. 2.4 dispone concretar textualmente un <strong style="color:rgba(255,255,255,0.8)">"Área Antártica Internacional"</strong> que consolide a Ushuaia como enclave logístico-científico-académico. El mandato fue establecido en 2004.</p>
+      <p class="law-body">Su Art. 2.4 dispone concretar textualmente un <strong style="color:rgba(255,255,255,0.75)">"Área Antártica Internacional"</strong> que consolide a Ushuaia como enclave logístico-científico-académico. El mandato fue establecido en 2004.</p>
       <div class="law-quote">"...concretar el Área Antártica Internacional consolidando la península de Ushuaia como enclave logístico-científico-académico." — Art. 2.4</div>
     </div>
-    <div class="law-card reveal reveal-delay-3">
+    <div class="law-card reveal d3">
       <span class="law-tag">Ley Nacional 19.640 — Régimen Fiscal TDF</span>
       <div class="law-title">Un régimen diferencial único</div>
-      <p class="law-body">El régimen de promoción fiscal de Tierra del Fuego —exenciones de IVA, ganancias y derechos de importación— aplica a toda operación radicada en la provincia. Es una ventaja competitiva estructural que ningún otro hub antártico del mundo posee.</p>
+      <p class="law-body">Exenciones de IVA, ganancias y derechos de importación para toda operación radicada en la provincia. Es una ventaja competitiva estructural que ningún otro hub antártico del mundo posee.</p>
     </div>
   </div>
 </section>
 
-<!-- CONVOCATORIA -->
-<section class="call" id="contacto">
-  <div class="call-text">
-    <span class="intro-label reveal">Una Convocatoria</span>
-    <h2 class="intro-heading reveal reveal-delay-1" style="max-width:400px">
-      Lo que falta no es otra ley.
-    </h2>
-    <div class="intro-rule reveal reveal-delay-1"></div>
-    <p class="intro-body reveal reveal-delay-2" style="max-width:460px">
-      Lo que falta es la decisión de ejecutar las que ya existen, y el coraje empresario para hacerlo. PAIX es el marco conceptual, normativo y operativo que promueven empresarios de Tierra del Fuego convencidos de que esta provincia puede asumir plenamente el rol que la geografía, la historia y la ley le asignan.
-    </p>
-    <p class="intro-body reveal reveal-delay-3" style="margin-top:2rem; max-width:460px">
-      Sus ocho vectores no compiten entre sí. Se potencian. La infraestructura del Vector I es la base que el Vector II necesita. Los recursos que el Vector III forma son los que el Vector I demanda.
-    </p>
-    <div style="margin-top:3rem" class="reveal reveal-delay-3">
-      <a href="mailto:alo@paix.ar" style="
-        display:inline-block;
-        font-size:0.72rem; font-weight:500;
-        letter-spacing:0.18em; text-transform:uppercase;
-        color:#fff; text-decoration:none;
-        border:1px solid rgba(107,174,214,0.5);
-        padding:0.9rem 2rem;
-        transition:all 0.25s;
-      "
-      onmouseover="this.style.background='rgba(107,174,214,0.1)';this.style.borderColor='rgba(107,174,214,0.9)'"
-      onmouseout="this.style.background='transparent';this.style.borderColor='rgba(107,174,214,0.5)'"
-      >alo@paix.ar</a>
-    </div>
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <div class="cta-visual">
+    <div class="cta-vis-bg"></div>
+    <div class="cta-vis-grid"></div>
+    <div class="cta-vis-word">paix</div>
+    <div class="cta-vis-line"></div>
+    <div class="cta-vis-stat">Ushuaia — Antártida</div>
   </div>
-  <div class="call-img-wrap">
-    <img class="call-img" src="Fotos/michelle2214-drake-passage-2680619_1920.jpg" alt="Pasaje Drake">
-    <div class="call-overlay"></div>
+  <div class="cta-text">
+    <span class="section-tag reveal">Una Convocatoria</span>
+    <h2 class="section-h reveal d1">Lo que falta<br>no es otra ley.</h2>
+    <div class="section-rule reveal d1"></div>
+    <p class="section-body reveal d2">
+      Lo que falta es la decisión de ejecutar las que ya existen, y el coraje empresario para hacerlo. PAIX es el marco conceptual, normativo y operativo promovido por empresarios de Tierra del Fuego convencidos de que esta provincia puede asumir plenamente el rol que la geografía, la historia y la ley le asignan.
+    </p>
+    <p class="section-body reveal d3" style="margin-top:1.2rem">
+      Sus ocho vectores no compiten entre sí. Se potencian. El Vector I genera la infraestructura que el Vector II necesita. El Vector III forma los recursos que el Vector I demanda. El Vector VIII demuestra que la demanda ya existe.
+    </p>
+    <a href="mailto:alo@paix.ar" class="cta-email reveal d3">alo@paix.ar</a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-brand">PAIX</div>
-  <div class="footer-info">
-    <div class="footer-info-main">
+  <div class="footer-logo">PAIX</div>
+  <div class="footer-right">
+    <div class="footer-main">
       <strong>Plataforma Antártica Internacional Ushuaia</strong><br>
       Ushuaia, Tierra del Fuego, Argentina<br>
       <a href="mailto:alo@paix.ar">alo@paix.ar</a>
@@ -371,23 +378,82 @@
 </footer>
 
 <script>
-  // Nav scroll
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
+// ── NAV SCROLL ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
 
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
+// ── REVEAL ON SCROLL ──
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => io.observe(el));
+
+// ── MAPA INTERACTIVO — PAN + ZOOM ──
+const container = document.getElementById('mapContainer');
+const svg = document.getElementById('antarctic-map');
+
+let isDragging = false;
+let startX, startY, translateX = 0, translateY = 0;
+let scale = 1;
+const MIN_SCALE = 0.7, MAX_SCALE = 3.5;
+
+function applyTransform() {
+  svg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+  svg.style.animation = isDragging ? 'none' : 'floatMap 7s ease-in-out infinite';
+}
+
+// Drag
+container.addEventListener('mousedown', e => {
+  isDragging = true;
+  startX = e.clientX - translateX;
+  startY = e.clientY - translateY;
+  container.style.cursor = 'grabbing';
+});
+window.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  translateX = e.clientX - startX;
+  translateY = e.clientY - startY;
+  applyTransform();
+});
+window.addEventListener('mouseup', () => {
+  isDragging = false;
+  container.style.cursor = 'grab';
+});
+
+// Touch drag
+container.addEventListener('touchstart', e => {
+  isDragging = true;
+  startX = e.touches[0].clientX - translateX;
+  startY = e.touches[0].clientY - translateY;
+}, { passive: true });
+container.addEventListener('touchmove', e => {
+  if (!isDragging) return;
+  translateX = e.touches[0].clientX - startX;
+  translateY = e.touches[0].clientY - startY;
+  applyTransform();
+}, { passive: true });
+container.addEventListener('touchend', () => { isDragging = false; });
+
+// Zoom con rueda
+container.addEventListener('wheel', e => {
+  e.preventDefault();
+  const delta = e.deltaY > 0 ? 0.9 : 1.1;
+  scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale * delta));
+  applyTransform();
+}, { passive: false });
+
+// Double click reset
+container.addEventListener('dblclick', () => {
+  scale = 1; translateX = 0; translateY = 0;
+  svg.style.transition = 'transform 0.5s ease';
+  applyTransform();
+  setTimeout(() => { svg.style.transition = ''; }, 500);
+});
 </script>
 </body>
 </html>
