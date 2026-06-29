@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAIX — Plataforma Antártica Internacional Ushuaia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul-marino:    #0A1628;
+      --blanco-glaciar: #F2F4F7;
+      --acero-frio:     #8A9BB0;
+      --azul-antartico: #1B6CA8;
+      --azul-profundo:  #060D18;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--azul-marino);
+      color: var(--blanco-glaciar);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 4rem;
+      background: rgba(10, 22, 40, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; letter-spacing: 0.22em; color: white;
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      color: var(--acero-frio); text-decoration: none;
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: white; }
+
+    /* ── HERO ── */
+    .hero {
+      height: 100vh; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('Fotos/358611-antarctica-415211_1920.jpg') center/cover no-repeat;
+      filter: brightness(0.28);
+      transform: scale(1.04);
+      animation: slowzoom 20s ease-in-out infinite alternate;
+    }
+    @keyframes slowzoom { to { transform: scale(1.10); } }
+
+    .hero-content {
+      position: relative; z-index: 1;
+      text-align: center; padding: 2rem;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--azul-antartico); margin-bottom: 1.8rem;
+    }
+    .hero-wordmark {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(7rem, 18vw, 14rem);
+      letter-spacing: 0.18em; line-height: 1;
+      color: white;
+      text-shadow: 0 0 120px rgba(27,108,168,0.25);
+    }
+    .hero-fullname {
+      font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--acero-frio); margin-top: 1.6rem;
+    }
+    .hero-divider {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, var(--azul-antartico), transparent);
+      margin: 2.5rem auto;
+    }
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: clamp(1rem, 2vw, 1.3rem);
+      color: rgba(255,255,255,0.6); max-width: 520px; line-height: 1.6;
+    }
+    .scroll-cue {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: var(--acero-frio); font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px; height: 36px;
+      background: linear-gradient(to bottom, var(--azul-antartico), transparent);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+    /* ── SHARED SECTION STYLES ── */
+    section { padding: 7rem 4rem; }
+    .label {
+      font-size: 0.68rem; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--azul-antartico); margin-bottom: 1rem; display: block;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400; line-height: 1.2; color: white; margin-bottom: 1.6rem;
+    }
+    .body-text {
+      color: var(--acero-frio); line-height: 1.85;
+      font-weight: 300; font-size: 0.97rem; max-width: 680px;
+    }
+    .rule { width: 40px; height: 2px; background: var(--azul-antartico); margin: 2rem 0; }
+
+    /* ── BRAND SECTION ── */
+    #marca { background: var(--blanco-glaciar); }
+    #marca .label { color: var(--azul-antartico); }
+    #marca h2 { color: var(--azul-marino); }
+    #marca .body-text { color: #4a5568; }
+    #marca .rule { background: var(--azul-antartico); }
+
+    .brand-layers {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 0;
+      margin-top: 4rem; border-top: 1px solid #dde3ea;
+    }
+    .brand-layer {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid #dde3ea;
+      transition: background .3s;
+    }
+    .brand-layer:last-child { border-right: none; }
+    .brand-layer:hover { background: rgba(27,108,168,0.05); }
+    .layer-num {
+      font-size: 0.65rem; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--azul-antartico); margin-bottom: 1.2rem;
+    }
+    .layer-head {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; color: var(--azul-marino); margin-bottom: 1rem;
+    }
+    .layer-body { font-size: 0.88rem; color: #4a5568; line-height: 1.8; }
+    .layer-word {
+      display: inline-block;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem; color: var(--azul-antartico);
+      letter-spacing: 0.1em; margin-bottom: 0.75rem; line-height: 1;
+    }
+
+    /* ── NORMATIVA ── */
+    #normativa { background: var(--azul-marino); }
+
+    .law-grid {
+      display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem;
+      margin-top: 4rem;
+    }
+    .law-card {
+      padding: 2.5rem;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.02);
+      transition: border-color .3s, background .3s;
+    }
+    .law-card:hover {
+      border-color: rgba(27,108,168,0.5);
+      background: rgba(27,108,168,0.05);
+    }
+    .law-tag {
+      font-size: 0.65rem; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--azul-antartico); margin-bottom: 0.75rem;
+    }
+    .law-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; color: white; margin-bottom: 1rem;
+    }
+    .law-card p { font-size: 0.85rem; color: var(--acero-frio); line-height: 1.75; max-width: 100%; }
+    .law-quote {
+      margin-top: 1.2rem; padding: 1rem 1.2rem;
+      background: rgba(27,108,168,0.1);
+      border-left: 2px solid var(--azul-antartico);
+      font-style: italic; font-size: 0.83rem; color: rgba(255,255,255,0.75);
+      line-height: 1.65;
+    }
+
+    /* ── FULLWIDTH IMAGE ── */
+    .img-break {
+      height: 420px; position: relative; overflow: hidden;
+    }
+    .img-break img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(0.45);
+      transition: transform 8s ease;
+    }
+    .img-break:hover img { transform: scale(1.04); }
+    .img-caption {
+      position: absolute; bottom: 2.5rem; left: 4rem;
+      font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .img-caption strong { color: rgba(255,255,255,0.85); }
+
+    /* ── CONVOCATORIA ── */
+    #convocatoria {
+      display: grid; grid-template-columns: 1fr 1fr;
+      padding: 0; gap: 0;
+    }
+    .conv-text {
+      padding: 8rem 5rem 8rem 4rem;
+      background: var(--azul-profundo);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .conv-image { position: relative; min-height: 560px; overflow: hidden; }
+    .conv-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(0.55);
+    }
+    .conv-image-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--azul-profundo) 0%, transparent 30%);
+    }
+
+    /* ── VECTORES ── */
+    #vectores { background: var(--azul-profundo); padding-bottom: 4rem; }
+
+    .vectors-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
+      margin-top: 4rem; background: rgba(255,255,255,0.04);
+    }
+    .vector-card {
+      position: relative; overflow: hidden; min-height: 400px;
+      cursor: default;
+    }
+    .v-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform .6s ease;
+    }
+    .vector-card:hover .v-bg { transform: scale(1.07); }
+    .v-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(6,13,24,0.97) 35%, rgba(6,13,24,0.45) 100%);
+      transition: background .4s;
+    }
+    .vector-card:hover .v-overlay {
+      background: linear-gradient(to top, rgba(6,13,24,0.99) 50%, rgba(6,13,24,0.55) 100%);
+    }
+    .v-content {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 2rem;
+    }
+    .v-num {
+      font-size: 0.62rem; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--azul-antartico); margin-bottom: 0.4rem;
+    }
+    .v-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; color: white; margin-bottom: 0.6rem; line-height: 1.3;
+    }
+    .v-desc {
+      font-size: 0.78rem; color: var(--acero-frio);
+      line-height: 1.65; max-width: 100%;
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, opacity .4s ease;
+      opacity: 0;
+    }
+    .vector-card:hover .v-desc { max-height: 200px; opacity: 1; }
+    .v-tag {
+      display: inline-block; margin-top: 0.8rem;
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--azul-antartico);
+      border-top: 1px solid rgba(27,108,168,0.3); padding-top: 0.6rem; width: 100%;
+    }
+
+    /* ── STATS ── */
+    #stats {
+      background: var(--azul-antartico);
+      padding: 5rem 4rem; text-align: center;
+    }
+    #stats .label { color: rgba(255,255,255,0.6); margin-bottom: 3rem; }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem;
+    }
+    .stat-n {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem; color: white; line-height: 1;
+    }
+    .stat-l {
+      font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255,255,255,0.65); margin-top: 0.6rem; line-height: 1.5;
+    }
+    .stat-src {
+      font-size: 0.6rem; color: rgba(255,255,255,0.35);
+      margin-top: 0.3rem; font-style: italic;
+    }
+
+    /* ── SÍNTESIS ── */
+    #sintesis {
+      background: var(--azul-marino);
+      padding: 7rem 4rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    #sintesis .label { margin-bottom: 2rem; }
+    .sintesis-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.52);
+      line-height: 1.82;
+      margin-bottom: 1.6rem;
+    }
+    .sintesis-text:last-of-type { margin-bottom: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 5rem 4rem 3rem;
+      display: flex; justify-content: space-between; align-items: flex-end;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-wordmark {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem; color: rgba(255,255,255,0.06);
+      letter-spacing: 0.12em; line-height: 1;
+    }
+    .footer-meta {
+      text-align: right;
+      font-size: 0.78rem; color: var(--acero-frio); line-height: 2;
+    }
+    .footer-meta strong { color: white; font-weight: 500; }
+    .footer-ley {
+      margin-top: 1.5rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.62rem; color: rgba(255,255,255,0.22);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .vectors-grid { grid-template-columns: repeat(2,1fr); }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 5rem 1.5rem; }
+      .brand-layers { grid-template-columns: 1fr; }
+      .brand-layer { border-right: none; border-bottom: 1px solid #dde3ea; }
+      .law-grid { grid-template-columns: 1fr; }
+      #convocatoria { grid-template-columns: 1fr; }
+      .conv-image { min-height: 320px; }
+      .conv-text { padding: 5rem 1.5rem; }
+      .vectors-grid { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; gap: 2rem; align-items: flex-start; }
+      .footer-meta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">PAIX</div>
+  <div class="nav-links">
+    <a href="#marca">La Marca</a>
+    <a href="#normativa">Marco Normativo</a>
+    <a href="#vectores">Vectores</a>
+    <a href="#convocatoria">Convocatoria</a>
+    <a href="#sintesis">Síntesis</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Ushuaia · Antártida · Argentina</span>
+    <div class="hero-wordmark">PAIX</div>
+    <div class="hero-fullname">Plataforma Antártica Internacional U·shuaia</div>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">Presentamos la plataforma desde donde Ushuaia conecta al mundo con la Antártida.</p>
+  </div>
+  <div class="scroll-cue">
+    <div class="scroll-line"></div>
+    <span>Explorar</span>
+  </div>
+</section>
+
+<!-- IMAGEN BREAK 1 -->
+<div class="img-break">
+  <img src="Fotos/michelle2214-drake-passage-2680619_1920.jpg" alt="Pasaje Drake">
+  <div class="img-caption">
+    <strong>Pasaje Drake</strong> — La ruta antártica más transitada del mundo parte desde Ushuaia
+  </div>
+</div>
+
+<!-- MARCA -->
+<section id="marca">
+  <span class="label">La Marca</span>
+  <h2>Tres lecturas.<br>Una sola palabra.</h2>
+  <div class="rule" style="background:var(--azul-antartico)"></div>
+  <p class="body-text" style="color:#4a5568">
+    PAIX no es solo un acrónimo. Es un nombre construido en capas: cada una con su propia lógica, todas convergentes en el mismo significado.
+  </p>
+
+  <div class="brand-layers">
+    <div class="brand-layer">
+      <div class="layer-num">Capa I — Acrónimo</div>
+      <div class="layer-word">P·A·I·X</div>
+      <div class="layer-head">Plataforma Antártica Internacional U·shuaia</div>
+      <p class="layer-body">
+        La X representa a Ushuaia a través de la tradición ortográfica del español colonial, en la que los topónimos de origen indígena se escribían con esa letra: México, Oaxaca, Xochimilco. El nombre Ushuaia proviene del Yagán —la lengua del pueblo que habitó el extremo austral— y esa raíz fonética lleva el mismo espíritu que la grafía histórica.
+      </p>
+    </div>
+    <div class="brand-layer">
+      <div class="layer-num">Capa II — Semántica</div>
+      <div class="layer-word" style="font-style:italic">paix</div>
+      <div class="layer-head">Paz, en el idioma de la diplomacia</div>
+      <p class="layer-body">
+        <em>Paix</em> es el término francés para paz. El idioma de la diplomacia internacional. Una referencia directa al espíritu del Tratado Antártico: el acuerdo de cooperación pacífica entre naciones más longevo de la historia moderna, firmado en 1959, vigente como marco regulatorio de todo lo que ocurre en y desde la Antártida.
+      </p>
+    </div>
+    <div class="brand-layer">
+      <div class="layer-num">Capa III — Raíz</div>
+      <div class="layer-word">pax</div>
+      <div class="layer-head">La raíz que todas las lenguas reconocen</div>
+      <p class="layer-body">
+        <em>Pax</em>, en latín, es la paz que todas las lenguas del sistema antártico comprenden sin traducción. Una convergencia que no fue buscada pero que el nombre porta con naturalidad. Cuando alguien pregunta qué significa PAIX, la respuesta ya es parte del discurso del proyecto.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- NORMATIVA -->
+<section id="normativa">
+  <span class="label">Marco Normativo</span>
+  <h2>La ley lo ordena<br>desde 2004.</h2>
+  <div class="rule"></div>
+  <p class="body-text">
+    PAIX materializa el mandato legislativo que la Provincia de Tierra del Fuego estableció hace dos décadas. No es una propuesta. No es una aspiración. Es un encargo pendiente de ejecución.
+  </p>
+
+  <div class="law-grid">
+    <div class="law-card">
+      <div class="law-tag">Ley Provincial 23.775/90 — Nacional</div>
+      <h3>Una Provincia Bicontinental</h3>
+      <p>La provincialización de Tierra del Fuego estableció un territorio que incluye tanto la Isla Grande como los demás territorios comprendidos en el sector antártico argentino, entre los meridianos 25° y 74° Oeste, hasta el Polo Sur. Argentina es el único país del mundo con una provincia que gobierna simultáneamente territorio americano y antártico.</p>
+    </div>
+    <div class="law-card">
+      <div class="law-tag">Ley Provincial 585/03 — Política Antártica</div>
+      <h3>El mandato de servir</h3>
+      <p>Define como actividad antártica provincial toda operación —pública o privada, nacional o internacional— que utilice TDF como base de apoyo. Obliga a la Provincia a promover servicios antárticos (Art. 8), a propiciar un complejo integrado multimodal (Art. 9), y establece que los convenios con operadores antárticos aprobados por la Legislatura adquieren fuerza de Ley (Art. 15).</p>
+      <div class="law-quote">"...propiciar el desarrollo de un complejo integrado y multimodal para la actividad antártica." — Art. 9</div>
+    </div>
+    <div class="law-card">
+      <div class="law-tag">Ley Provincial 640/04 — Ushuaia Conexión Óptima</div>
+      <h3>El nombre ya existía</h3>
+      <p>Su Art. 2.4 dispone concretar, textualmente, un <strong style="color:white">"Área Antártica Internacional"</strong> que consolide a Ushuaia como enclave logístico-científico-académico. El mandato fue establecido en 2004. PAIX es la identidad con la que ese mandato empieza a ejecutarse en 2026.</p>
+      <div class="law-quote">"...concretar el Área Antártica Internacional consolidando la península de Ushuaia como enclave logístico-científico-académico." — Art. 2.4</div>
+    </div>
+    <div class="law-card">
+      <div class="law-tag">Ley Nacional 19.640 — Régimen Fiscal TDF</div>
+      <h3>Un régimen diferencial único</h3>
+      <p>El régimen de promoción fiscal de Tierra del Fuego —exenciones de IVA, ganancias y derechos de importación— aplica a toda operación radicada en la provincia, incluyendo la infraestructura logística, las operaciones de combustible y los servicios de soporte antártico. Es una ventaja competitiva estructural que ningún otro hub antártico del mundo posee.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONVOCATORIA -->
+<section id="convocatoria">
+  <div class="conv-text">
+    <span class="label">Una Convocatoria desde el Territorio</span>
+    <h2 style="max-width:440px">Las decisiones antárticas se toman a 3.000 km de la Antártida.</h2>
+    <div class="rule"></div>
+    <p class="body-text" style="max-width:480px">
+      La Dirección Nacional del Antártico, el Comando Conjunto Antártico, las dependencias de Cancillería con incumbencia antártica: todas planifican y deciden desde Buenos Aires. A 3.000 kilómetros del único lugar del país desde donde se puede tocar, abastecer y apoyar el continente blanco.
+    </p>
+    <br>
+    <p class="body-text" style="max-width:480px">
+      La Ley 585/03 (Art. 5) establece que la Provincia debe complementar a las instituciones nacionales en materia antártica. El complemento real no puede darse a distancia. PAIX es la plataforma desde la cual hacer posible esa convergencia.
+    </p>
+  </div>
+  <div class="conv-image">
+    <img src="Fotos/azorko-ushuaia-4073067_1920.jpg" alt="Ushuaia">
+    <div class="conv-image-overlay"></div>
+  </div>
+</section>
+
+<!-- VECTORES -->
+<section id="vectores">
+  <span class="label">Vectores de Desarrollo</span>
+  <h2>Ocho vectores.<br>Un sistema.</h2>
+  <div class="rule"></div>
+  <p class="body-text">
+    PAIX organiza su desarrollo en torno a ocho vectores que convergen en el mismo territorio, bajo el mismo marco normativo, con el mismo horizonte. Cada uno refuerza a los demás.
+  </p>
+
+  <div class="vectors-grid">
+
+    <!-- V1 Logístico -->
+    <div class="vector-card">
+      <div class="v-bg" style="background-image:url('Fotos/10871402-icebreaker-3889864.jpg')"></div>
+      <div class="v-overlay"></div>
+      <div class="v-content">
+        <div class="v-num">Vector I</div>
+        <div class="v-title">Logístico</div>
+        <div class="v-desc">Almacenamiento y distribución de combustible —gasoil marino y JET A-1—, consolidación de cargas antárticas, servicios a buques en tránsito y gestión de residuos polares. Primera pieza operativa a capitalizar.</div>
+        <div class="v-tag">Fideicomiso Polo Logístico · Ley 640/04 Art. 2.3</div>
+      </div>
+    </div>
+
+    <!-- V2 Científico -->
+    <div class="vector-card">
+      <div class="v-bg" style="background-image:url('Fotos/10871402-antarctica-3883212_1920.jpg')"></div>
+      <div class="v-overlay"></div>
+      <div class="v-content">
+        <div class="v-num">Vector II</div>
+        <div class="v-title">Científico</div>
+        <div class="v-desc">El CADIC como nodo de acceso para investigadores de todo el mundo. Cualquier programa puede enviar científicos a desarrollar tesis y proyectos con acceso a laboratorios y plataforma logística.</div>
+        <div class="v-tag">CADIC · CONICET · Tratado Antártico</div>
+      </div>
+    </div>
+
+    <!-- V3 Educativo -->
+    <div class="vector-card">
+      <div class="v-bg" style="background-image:url('Fotos/12237115-patagonia-4207899_1920.jpg')"></div>
+      <div class="v-overlay"></div>
+      <div class="v-content">
+        <div class="v-num">Vector III</div>
+        <div class="v-title">Educativo y Académico</div>
+        <div class="v-desc">La UNTDF como polo de captación de estudiantes de posgrado del mundo entero interesados en la investigación antártica. La universidad de la Antártida, en el lugar más cercano al continente.</div>
+        <div class="v-tag">UNTDF · Ley 585/03 Art. 10</div>
+      </div>
+    </div>
+
+    <!-- V4 Militar -->
+    <div class="vector-card">
+      <div class="v-bg" style="background-image:url('Fotos/10871402-helicopter-5602410_1920.jpg')"></div>
+      <div class="v-overlay"></div>
+      <div class="v-content">
+        <div class="v-num">Vector IV</div>
+        <div class="v-title">Militar y de Soberanía</div>
+        <div class="v-desc">Modernización de la Base Naval Integrada, refuerzo SAR en el Atlántico Sur y el pasaje Drake, asentamiento fueguino del COCOANTAR, e integración del desarrollo en curso del aeropuerto de Base Petrel.</div>
+        <div class="v-tag">Armada Argentina · COCOANTAR · Base Petrel</div>
+      </div>
+    </div>
+
+    <!-- V5 Institucional -->
+    <div class="vector-card">
+      <div class="v-bg" style="background-image:url('Fotos/jorono-international-2690837_1920.jpg')"></div>
+      <div class="v-overlay"></div>
+      <div class="v-content">
+        <div class="v-num">Vector V</div>
+        <div class="v-title">Institucional y Comercial</div>
+        <div class="v-desc">Unidad de diseño, captación y venta de servicios a programas antárticos del mundo, a través de la red de embajadas argentinas. Equipo integrado: perfil comercial + científico + logístico.</div>
+        <div class="v-tag">Cancillería · Puerto Ushuaia · RAPAL</div>
+      </div>
+    </div>
+
+    <!-- V6 Internacional -->
+    <div class="vector-card">
+      <div class="v-bg" style="background-image:url('Fotos/michelle2214-drake-passage-2680622_1920.jpg')"></div>
+      <div class="v-overlay"></div>
+      <div class="v-content">
+        <div class="v-num">Vector VI</div>
+        <div class="v-title">Internacional y Diplomático</div>
+        <div class="v-desc">Ushuaia como sede de coordinación regional: anfitrión de reuniones del sistema del Tratado Antártico, plataforma para acuerdos bilaterales y nodo de referencia para programas sin infraestructura propia.</div>
+        <div class="v-tag">Tratado Antártico · RAPAL · 30+ países</div>
+      </div>
+    </div>
+
+    <!-- V7 Ambiental -->
+    <div class="vector-card">
+      <div class="v-bg" style="background-image:url('Fotos/publicdomainpictures-berg-17086_1920.jpg')"></div>
+      <div class="v-overlay"></div>
+      <div class="v-content">
+        <div class="v-num">Vector VII</div>
+        <div class="v-title">Ambiental y de Sustentabilidad</div>
+        <div class="v-desc">Gestión de última milla para operaciones polares. Posicionamiento: operar desde Ushuaia no es solo más eficiente — es más responsable. Cuanto más cerca la base de operaciones, menor la huella acumulada.</div>
+        <div class="v-tag">Protocolo de Madrid · Gestión última milla</div>
+      </div>
+    </div>
+
+    <!-- V8 Turístico -->
+    <div class="vector-card">
+      <div class="v-bg" style="background-image:url('Fotos/peter_mcnally-ship-7773072_1920.jpg')"></div>
+      <div class="v-overlay"></div>
+      <div class="v-content">
+        <div class="v-num">Vector VIII</div>
+        <div class="v-title">Turístico y Expedicionario</div>
+        <div class="v-desc">El vector más desarrollado. Más de 122.000 visitantes en la temporada 2023-24 (IAATO). PAIX propone que la IAATO establezca en Ushuaia su sede regional de coordinación operativa.</div>
+        <div class="v-tag">IAATO · +122.000 visitantes/temporada</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <span class="label">El contexto en números</span>
+  <div class="stats-grid">
+    <div>
+      <div class="stat-n">+122K</div>
+      <div class="stat-l">Visitantes antárticos<br>temporada 2023–24</div>
+      <div class="stat-src">Fuente: IAATO Annual Report 2023-24</div>
+    </div>
+    <div>
+      <div class="stat-n">30+</div>
+      <div class="stat-l">Países con programas<br>antárticos activos</div>
+      <div class="stat-src">Fuente: Sistema del Tratado Antártico</div>
+    </div>
+    <div>
+      <div class="stat-n">1.000 km</div>
+      <div class="stat-l">Distancia de Ushuaia<br>a la Península Antártica</div>
+      <div class="stat-src">El hub más cercano del mundo</div>
+    </div>
+    <div>
+      <div class="stat-n">2004</div>
+      <div class="stat-l">Año en que la ley ordenó<br>crear el Área Antártica Internacional</div>
+      <div class="stat-src">Ley Provincial TDF 640/04 Art. 2.4</div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGEN BREAK 2 -->
+<div class="img-break">
+  <img src="Fotos/storre-ship-6347267_1920.jpg" alt="Buque antártico">
+  <div class="img-caption">
+    <strong>Puerto de Ushuaia</strong> — Principal punto de partida del turismo antártico mundial
+  </div>
+</div>
+
+<!-- SÍNTESIS -->
+<section id="sintesis">
+  <span class="label">Síntesis</span>
+  <p class="sintesis-text">Lo que falta no es otra ley. Lo que falta es la decisión de ejecutar las que ya existen, y el coraje empresario para hacerlo.</p>
+  <p class="sintesis-text">PAIX es el marco conceptual, normativo y operativo que promueven empresarios de Tierra del Fuego convencidos de que esta provincia puede asumir plenamente la organización y el rol que la geografía, la historia y la ley le asignan.</p>
+  <p class="sintesis-text">Sus ocho vectores no compiten entre sí. Se potencian. El Vector I genera infraestructura que el Vector II necesita. El Vector III forma los recursos que el Vector I demanda. El Vector IV construye la soberanía que el Vector VI proyecta. El Vector V le da coherencia y capacidad comercial al conjunto. El Vector VII garantiza que todo se haga con responsabilidad sobre el ecosistema más frágil del planeta. Y el Vector VIII demuestra que la demanda ya existe y que el mundo sabe llegar.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-wordmark">PAIX</div>
+  <div class="footer-meta">
+    <strong>Plataforma Antártica Internacional Ushuaia</strong><br>
+    Ushuaia, Tierra del Fuego, Argentina<br>
+    <a href="mailto:alo@paix.ar" style="color:var(--azul-antartico);text-decoration:none;letter-spacing:0.05em">alo@paix.ar</a>
+    <div class="footer-ley">
+      Marco normativo: Ley Nacional 23.775/90 · Ley Provincial TDF 585/03 · Ley Provincial TDF 640/04 · Ley Nacional 19.640<br>
+      Documento conceptual v1.0 — Junio 2026 · Uso interno y presentaciones institucionales
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

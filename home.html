@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAIX — Inicio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul-marino:    #0A1628;
+      --blanco-glaciar: #F2F4F7;
+      --acero-frio:     #8A9BB0;
+      --azul-antartico: #1B6CA8;
+      --azul-profundo:  #060D18;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--azul-marino);
+      color: var(--blanco-glaciar);
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 4rem;
+      background: rgba(10, 22, 40, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; letter-spacing: 0.22em; color: white;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+    .nav-links a {
+      color: var(--acero-frio); text-decoration: none;
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: white; }
+    .nav-cta {
+      padding: 0.65rem 1.4rem;
+      background: var(--azul-antartico);
+      color: white !important;
+      border-radius: 2px;
+    }
+    .nav-cta:hover { filter: brightness(1.08); }
+
+    .hero {
+      min-height: 100vh; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('../Fotos/358611-antarctica-415211_1920.jpg') center/cover no-repeat;
+      filter: brightness(0.28);
+      transform: scale(1.04);
+      animation: slowzoom 20s ease-in-out infinite alternate;
+    }
+    @keyframes slowzoom { to { transform: scale(1.10); } }
+
+    .hero-content {
+      position: relative; z-index: 1;
+      text-align: center; padding: 2rem;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--azul-antartico); margin-bottom: 1.8rem;
+    }
+    .hero-wordmark {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(7rem, 18vw, 14rem);
+      letter-spacing: 0.18em; line-height: 1;
+      color: white;
+      text-shadow: 0 0 120px rgba(27,108,168,0.25);
+    }
+    .hero-fullname {
+      font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--acero-frio); margin-top: 1.6rem;
+    }
+    .hero-divider {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, var(--azul-antartico), transparent);
+      margin: 2.5rem auto;
+    }
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: clamp(1rem, 2vw, 1.3rem);
+      color: rgba(255,255,255,0.6); max-width: 520px; line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+      text-decoration: none;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .btn-primary {
+      background: var(--azul-antartico);
+      color: white;
+    }
+    .btn-primary:hover { filter: brightness(1.08); }
+    .btn-ghost {
+      border: 1px solid rgba(255,255,255,0.25);
+      color: var(--blanco-glaciar);
+    }
+    .btn-ghost:hover {
+      border-color: white;
+      color: white;
+    }
+
+    .intro {
+      padding: 7rem 4rem;
+      background: var(--blanco-glaciar);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .label {
+      font-size: 0.68rem; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--azul-antartico); margin-bottom: 1rem; display: block;
+    }
+    .intro h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400; line-height: 1.2;
+      color: var(--azul-marino); margin-bottom: 1.6rem;
+    }
+    .intro p {
+      color: #4a5568; line-height: 1.85;
+      font-weight: 300; font-size: 0.97rem;
+    }
+    .intro-cards {
+      display: grid; gap: 1rem;
+    }
+    .intro-card {
+      padding: 1.8rem 2rem;
+      border: 1px solid #dde3ea;
+      background: white;
+      transition: border-color .3s;
+    }
+    .intro-card:hover { border-color: var(--azul-antartico); }
+    .intro-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--azul-marino);
+      margin-bottom: 0.5rem;
+    }
+    .intro-card p {
+      font-size: 0.85rem;
+      margin: 0;
+    }
+
+    footer {
+      padding: 3rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.78rem; color: var(--acero-frio);
+    }
+    footer a { color: var(--azul-antartico); text-decoration: none; }
+    footer a:hover { color: white; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .intro { grid-template-columns: 1fr; padding: 5rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="home.html">PAIX</a>
+  <div class="nav-links">
+    <a href="#intro">Plataforma</a>
+    <a href="../paix.html#marca">La Marca</a>
+    <a href="../paix.html#vectores">Vectores</a>
+    <a href="../paix.html" class="nav-cta">Ver sitio completo</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Ushuaia · Antártida · Argentina</span>
+    <div class="hero-wordmark">PAIX</div>
+    <div class="hero-fullname">Plataforma Antártica Internacional U·shuaia</div>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">Desde el fin del mundo, conectamos ciencia, logística y cooperación internacional con la Antártida.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="../paix.html#convocatoria">Convocatoria 2026</a>
+      <a class="btn btn-ghost" href="../paix.html">Explorar la plataforma</a>
+    </div>
+  </div>
+</section>
+
+<section class="intro" id="intro">
+  <div>
+    <span class="label">Inicio</span>
+    <h2>El hub antártico<br>del hemisferio sur</h2>
+    <p>
+      PAIX materializa el mandato provincial de consolidar Ushuaia como enclave logístico, científico y académico para la actividad antártica internacional. Esta es la página de entrada al proyecto.
+    </p>
+  </div>
+  <div class="intro-cards">
+    <div class="intro-card">
+      <h3>Marco normativo</h3>
+      <p>Ley 640/04 y el encargo de un Área Antártica Internacional desde 2004.</p>
+    </div>
+    <div class="intro-card">
+      <h3>Cuatro vectores</h3>
+      <p>Logística, ciencia, formación y diplomacia como ejes de la plataforma.</p>
+    </div>
+    <div class="intro-card">
+      <h3>Documento completo</h3>
+      <p><a href="../paix.html" style="color:var(--azul-antartico)">paix.html</a> — presentación integral de la marca y la convocatoria.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>PAIX · Tierra del Fuego, Antártida e Islas del Atlántico Sur</span>
+  <a href="../paix.html">Ir al sitio completo →</a>
+</footer>
+
+</body>
+</html>
