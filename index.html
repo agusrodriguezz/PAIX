@@ -117,6 +117,9 @@
     .photo-card{aspect-ratio:4/5}
     .photo-card img,.photo-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease)}
     .photo-card:hover img,.photo-tile:hover img{transform:scale(1.045)}
+    .banner-polar,.closing-banner{padding:0 clamp(1.5rem,5vw,3.5rem);background:linear-gradient(180deg,var(--ice),var(--glacier))}
+    .banner-polar img,.closing-banner img{width:100%;height:420px;object-fit:cover;display:block;border-radius:32px;box-shadow:0 20px 60px rgba(23,75,106,.12);border:1px solid var(--line)}
+    .vector-img{width:76px;height:76px;object-fit:cover;border-radius:18px;margin-bottom:1.4rem;border:1px solid var(--line);box-shadow:0 10px 26px rgba(23,75,106,.10)}
     figcaption{
       position:absolute;left:1rem;right:1rem;bottom:1rem;padding:.8rem 1rem;border-radius:999px;
       background:rgba(248,253,255,.84);backdrop-filter:blur(14px);font-size:.7rem;font-weight:900;
@@ -142,7 +145,7 @@
     .v-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
     .v-card{position:relative;min-height:430px;padding:2rem;border-radius:24px;background:linear-gradient(160deg,#fff,#DFF3FF);border:1px solid var(--line);box-shadow:0 20px 54px rgba(23,75,106,.11);overflow:hidden}
     .v-deco-num{position:absolute;right:1rem;top:.5rem;font-size:6rem;font-weight:950;color:rgba(47,159,212,.13)}
-    .v-body{position:relative;z-index:1;margin-top:8rem}
+    .v-body{position:relative;z-index:1;margin-top:2rem}
     .v-num{font-size:.72rem;font-weight:900;color:var(--ocean);text-transform:uppercase;letter-spacing:.12em}
     .v-name{font-size:1.35rem;font-weight:950;color:var(--ink);margin:.65rem 0 1rem}
     .v-desc{line-height:1.7;color:rgba(23,75,106,.68)}
@@ -182,6 +185,7 @@
       .hero-title{font-size:clamp(4rem,22vw,6rem)}
       .stats,.marca-grid,.v-grid,.law-grid,.photo-grid{grid-template-columns:1fr}
       .photo-grid{grid-auto-rows:320px}
+      .banner-polar img,.closing-banner img{height:280px}
       .stat{border-right:0;border-bottom:1px solid var(--line)}
       footer{flex-direction:column}
     }
@@ -224,7 +228,9 @@
     <div class="stat reveal d2"><div class="stat-n">30+</div><div class="stat-l">Países con programas<br>antárticos activos</div><div class="stat-s">Sistema del Tratado Antártico</div></div>
     <div class="stat reveal d3"><div class="stat-n">2004</div><div class="stat-l">Año en que la ley ordenó<br>crear el Área Antártica Int.</div><div class="stat-s">Ley Provincial TDF 640/04 Art. 2.4</div></div>
   </div>
-
+  <section class="banner-polar" aria-label="Paisaje antártico panorámico">
+    <img src="imagenes/iceberg.png" alt="Paisaje antártico con hielo, agua y montañas">
+  </section>
   <section class="split" id="posicion-texto">
     <div>
       <span class="section-tag reveal">La Posición</span>
@@ -275,14 +281,14 @@
     </div>
 
     <div class="v-grid">
-      <div class="v-card"><div class="v-deco-num">01</div><div class="v-body"><div class="v-num">Vector I</div><div class="v-name">Logístico</div><div class="v-desc">Combustible, cargas antárticas, servicios a buques y gestión de residuos polares.</div><span class="v-tag">Polo Logístico · Ley 640/04</span></div></div>
-      <div class="v-card"><div class="v-deco-num">02</div><div class="v-body"><div class="v-num">Vector II</div><div class="v-name">Científico</div><div class="v-desc">CADIC como nodo de acceso para investigadores y programas antárticos.</div><span class="v-tag">CADIC · CONICET</span></div></div>
-      <div class="v-card"><div class="v-deco-num">03</div><div class="v-body"><div class="v-num">Vector III</div><div class="v-name">Educativo</div><div class="v-desc">UNTDF como polo académico antártico y de formación internacional.</div><span class="v-tag">UNTDF · Posgrado</span></div></div>
-      <div class="v-card"><div class="v-deco-num">04</div><div class="v-body"><div class="v-num">Vector IV</div><div class="v-name">Soberanía</div><div class="v-desc">Base Naval Integrada, SAR y asentamiento fueguino del COCOANTAR.</div><span class="v-tag">Armada · COCOANTAR</span></div></div>
-      <div class="v-card"><div class="v-deco-num">05</div><div class="v-body"><div class="v-num">Vector V</div><div class="v-name">Comercial</div><div class="v-desc">Captación y venta de servicios para programas antárticos del mundo.</div><span class="v-tag">Cancillería · RAPAL</span></div></div>
-      <div class="v-card"><div class="v-deco-num">06</div><div class="v-body"><div class="v-num">Vector VI</div><div class="v-name">Diplomático</div><div class="v-desc">Ushuaia como sede regional de coordinación antártica internacional.</div><span class="v-tag">Tratado Antártico</span></div></div>
-      <div class="v-card"><div class="v-deco-num">07</div><div class="v-body"><div class="v-num">Vector VII</div><div class="v-name">Ambiental</div><div class="v-desc">Operar desde Ushuaia es más eficiente y más responsable.</div><span class="v-tag">Protocolo de Madrid</span></div></div>
-      <div class="v-card"><div class="v-deco-num">08</div><div class="v-body"><div class="v-num">Vector VIII</div><div class="v-name">Turístico</div><div class="v-desc">La demanda ya existe: turismo expedicionario y coordinación IAATO.</div><span class="v-tag">IAATO · +122K</span></div></div>
+      <div class="v-card"><img class="vector-img" src="imagenes/barco.png" alt=""><div class="v-deco-num">01</div><div class="v-body"><div class="v-num">Vector I</div><div class="v-name">Logístico</div><div class="v-desc">Combustible, cargas antárticas, servicios a buques y gestión de residuos polares.</div><span class="v-tag">Polo Logístico · Ley 640/04</span></div></div>
+      <div class="v-card"><img class="vector-img" src="imagenes/cientificos.png" alt=""><div class="v-deco-num">02</div><div class="v-body"><div class="v-num">Vector II</div><div class="v-name">Científico</div><div class="v-desc">CADIC como nodo de acceso para investigadores y programas antárticos.</div><span class="v-tag">CADIC · CONICET</span></div></div>
+      <div class="v-card"><img class="vector-img" src="imagenes/Base mambio con bandera de frente.png" alt=""><div class="v-deco-num">03</div><div class="v-body"><div class="v-num">Vector III</div><div class="v-name">Educativo</div><div class="v-desc">UNTDF como polo académico antártico y de formación internacional.</div><span class="v-tag">UNTDF · Posgrado</span></div></div>
+      <div class="v-card"><img class="vector-img" src="imagenes/helicoptero.png" alt=""><div class="v-deco-num">04</div><div class="v-body"><div class="v-num">Vector IV</div><div class="v-name">Soberanía</div><div class="v-desc">Base Naval Integrada, SAR y asentamiento fueguino del COCOANTAR.</div><span class="v-tag">Armada · COCOANTAR</span></div></div>
+      <div class="v-card"><img class="vector-img" src="imagenes/barco.png" alt=""><div class="v-deco-num">05</div><div class="v-body"><div class="v-num">Vector V</div><div class="v-name">Comercial</div><div class="v-desc">Captación y venta de servicios para programas antárticos del mundo.</div><span class="v-tag">Cancillería · RAPAL</span></div></div>
+      <div class="v-card"><img class="vector-img" src="imagenes/avion chico.png" alt=""><div class="v-deco-num">06</div><div class="v-body"><div class="v-num">Vector VI</div><div class="v-name">Diplomático</div><div class="v-desc">Ushuaia como sede regional de coordinación antártica internacional.</div><span class="v-tag">Tratado Antártico</span></div></div>
+      <div class="v-card"><img class="vector-img" src="imagenes/foto de solo la antartida.png" alt=""><div class="v-deco-num">07</div><div class="v-body"><div class="v-num">Vector VII</div><div class="v-name">Ambiental</div><div class="v-desc">Operar desde Ushuaia es más eficiente y más responsable.</div><span class="v-tag">Protocolo de Madrid</span></div></div>
+      <div class="v-card"><img class="vector-img" src="imagenes/auroras.png" alt=""><div class="v-deco-num">08</div><div class="v-body"><div class="v-num">Vector VIII</div><div class="v-name">Turístico</div><div class="v-desc">La demanda ya existe: turismo expedicionario y coordinación IAATO.</div><span class="v-tag">IAATO · +122K</span></div></div>
     </div>
   </section>
 
@@ -313,6 +319,9 @@
       <p class="section-body reveal d3" style="margin-top:1.2rem">PAIX es el marco conceptual, normativo y operativo para que Tierra del Fuego asuma plenamente el rol que la geografía, la historia y la ley le asignan.</p>
       <a href="mailto:alo@paix.ar" class="cta-email reveal d3">Contactar a PAIX</a>
     </div>
+  </section>
+  <section class="closing-banner" aria-label="Cierre visual antártico">
+    <img src="imagenes/auroras.png" alt="Aurora austral sobre paisaje antártico">
   </section>
 </main>
 
