@@ -3,12 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PAIX es la Plataforma Antártica Internacional Ushuaia, una iniciativa para consolidar a Ushuaia como el principal hub logístico, científico, académico e institucional hacia la Antártida.">
+  <meta name="theme-color" content="#040D1A">
+  <meta property="og:title" content="PAIX — Plataforma Antártica Internacional Ushuaia">
+  <meta property="og:description" content="La plataforma que impulsa a Ushuaia como puerta internacional hacia la Antártida.">
+  <meta property="og:type" content="website">
   <title>PAIX — Plataforma Antártica Internacional Ushuaia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="paix-nueva.css">
-</head>
+<\/head>
 <body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
@@ -23,12 +29,13 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<main id="contenido">
+<section class="hero" aria-labelledby="hero-title">
   <div class="hero-aurora"></div>
 
   <!-- MAPA INTERACTIVO SVG -->
   <div class="map-container" id="mapContainer">
-    <svg id="antarctic-map" viewBox="0 0 460 400" xmlns="http://www.w3.org/2000/svg">
+    <svg id="antarctic-map" viewBox="0 0 460 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa esquemático de la Antártida con la ubicación de Ushuaia">
 
       <!-- Latitudes -->
       <circle cx="230" cy="210" r="170" class="lat"/>
@@ -120,7 +127,7 @@
   <!-- Texto hero -->
   <div class="hero-text">
     <span class="hero-eyebrow">Ushuaia · Antártida · Argentina</span>
-    <div class="hero-title">PAIX</div>
+    <h1 class="hero-title" id="hero-title">PAIX</h1>
     <div class="hero-sub">Plataforma Antártica Internacional Ushuaia</div>
     <div class="hero-divider"></div>
     <p class="hero-tagline">El hub más cercano al continente más remoto.<br>Donde la geografía, la ley y la historia convergen.</p>
@@ -130,7 +137,7 @@
     <div class="scroll-bar"></div>
     <span>Explorar</span>
   </div>
-</section>
+<\/section>
 
 <!-- STATS -->
 <div class="stats" id="posicion">
@@ -357,9 +364,12 @@
     <p class="section-body reveal d3" style="margin-top:1.2rem">
       Sus ocho vectores no compiten entre sí. Se potencian. El Vector I genera la infraestructura que el Vector II necesita. El Vector III forma los recursos que el Vector I demanda. El Vector VIII demuestra que la demanda ya existe.
     </p>
-    <a href="mailto:alo@paix.ar" class="cta-email reveal d3">alo@paix.ar</a>
+    <a href="mailto:alo@paix.ar" class="cta-email reveal d3" aria-label="Contactar al equipo PAIX">Contactar a PAIX</a>
+    <div style="margin-top:1rem;font-size:.95rem;opacity:.8;">alo@paix.ar</div>
   </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -369,6 +379,7 @@
       <strong>Plataforma Antártica Internacional Ushuaia</strong><br>
       Ushuaia, Tierra del Fuego, Argentina<br>
       <a href="mailto:alo@paix.ar">alo@paix.ar</a>
+      <div style="margin-top:1rem;font-size:.95rem;opacity:.8;">alo@paix.ar</div>
     </div>
     <div class="footer-legal">
       Marco normativo: Ley Nacional 23.775/90 · Ley Provincial TDF 585/03 · Ley Provincial TDF 640/04 · Ley Nacional 19.640<br>
@@ -380,9 +391,11 @@
 <script>
 // ── NAV SCROLL ──
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
+if (nav) {
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+}
 
 // ── REVEAL ON SCROLL ──
 const reveals = document.querySelectorAll('.reveal');
