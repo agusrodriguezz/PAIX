@@ -119,7 +119,7 @@
     .photo-card:hover img,.photo-tile:hover img{transform:scale(1.045)}
     .banner-polar,.closing-banner{padding:0 clamp(1.5rem,5vw,3.5rem);background:linear-gradient(180deg,var(--ice),var(--glacier))}
     .banner-polar img,.closing-banner img{width:100%;height:420px;object-fit:cover;display:block;border-radius:32px;box-shadow:0 20px 60px rgba(23,75,106,.12);border:1px solid var(--line)}
-    .vector-img{width:76px;height:76px;object-fit:cover;border-radius:18px;margin-bottom:1.4rem;border:1px solid var(--line);box-shadow:0 10px 26px rgba(23,75,106,.10)}
+    .vector-img{width:88px;height:64px;object-fit:cover;border-radius:16px;margin-bottom:1.15rem;border:1px solid var(--line);box-shadow:0 10px 26px rgba(23,75,106,.10)}
     figcaption{
       position:absolute;left:1rem;right:1rem;bottom:1rem;padding:.8rem 1rem;border-radius:999px;
       background:rgba(248,253,255,.84);backdrop-filter:blur(14px);font-size:.7rem;font-weight:900;
@@ -143,13 +143,19 @@
     .v-header{display:flex;justify-content:space-between;align-items:end;margin-bottom:3rem}
     .v-big-num{font-size:clamp(5rem,11vw,10rem);font-weight:950;color:rgba(47,159,212,.14)}
     .v-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-    .v-card{position:relative;min-height:430px;padding:2rem;border-radius:24px;background:linear-gradient(160deg,#fff,#DFF3FF);border:1px solid var(--line);box-shadow:0 20px 54px rgba(23,75,106,.11);overflow:hidden}
-    .v-deco-num{position:absolute;right:1rem;top:.5rem;font-size:6rem;font-weight:950;color:rgba(47,159,212,.13)}
+    .v-card{position:relative;min-height:330px;padding:1.55rem;border-radius:24px;background:linear-gradient(160deg,#fff,#DFF3FF);border:1px solid var(--line);box-shadow:0 20px 54px rgba(23,75,106,.11);overflow:hidden;transition:min-height .32s var(--ease),box-shadow .32s var(--ease),transform .32s var(--ease)}
+    .v-card.is-open{min-height:520px;box-shadow:0 28px 70px rgba(23,75,106,.16);transform:translateY(-2px)}
+    .v-deco-num{position:absolute;right:1rem;top:.35rem;font-size:5rem;font-weight:950;color:rgba(47,159,212,.12)}
     .v-body{position:relative;z-index:1;margin-top:2rem}
     .v-num{font-size:.72rem;font-weight:900;color:var(--ocean);text-transform:uppercase;letter-spacing:.12em}
-    .v-name{font-size:1.35rem;font-weight:950;color:var(--ink);margin:.65rem 0 1rem}
-    .v-desc{line-height:1.7;color:rgba(23,75,106,.68)}
-    .v-tag{display:block;margin-top:1.4rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.68rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--ocean)}
+    .v-name{font-size:1.12rem;font-weight:950;color:var(--ink);margin:.55rem 0 .75rem;line-height:1.12;max-width:92%}
+    .v-desc{line-height:1.62;color:rgba(23,75,106,.68);font-size:.92rem;max-height:4.9em;overflow:hidden;position:relative;transition:max-height .32s var(--ease)}
+    .v-card:not(.is-open) .v-desc::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.65em;background:linear-gradient(180deg,rgba(223,243,255,0),#DFF3FF)}
+    .v-card.is-open .v-desc{max-height:24rem}
+    .v-card.is-open .v-desc::after{display:none}
+    .v-tag{display:block;margin-top:1.05rem;padding-top:.85rem;border-top:1px solid var(--line);font-size:.62rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:var(--ocean)}
+    .v-more{margin-top:.9rem;border:0;background:rgba(47,159,212,.10);color:var(--ocean);border-radius:999px;padding:.55rem .85rem;font-size:.64rem;font-weight:950;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .22s var(--ease),transform .22s var(--ease)}
+    .v-more:hover{background:rgba(47,159,212,.18);transform:translateY(-1px)}
 
     .normativa{background:linear-gradient(180deg,var(--glacier),var(--ice))}
     .law-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:3rem}
@@ -279,12 +285,12 @@
 
     <div class="v-grid">
       <div class="v-card"><img class="vector-img" src="imagenes/sodiac.png" alt=""><div class="v-deco-num">01</div><div class="v-body"><div class="v-num">Vector I</div><div class="v-name">Logístico</div><div class="v-desc">Almacenamiento y distribución de combustible —gasoil marino y JET A-1—, consolidación de cargas antárticas, servicios a buques en tránsito y gestión de residuos polares. Primera pieza operativa a capitalizar.</div><span class="v-tag">Fideicomiso Polo Logístico · Ley 640/04 Art. 2.3</span></div></div>
-      <div class="v-card"><img class="vector-img" src="imagenes/bhart9070-ship-2455240.jpeg" alt=""><div class="v-deco-num">02</div><div class="v-body"><div class="v-num">Vector II</div><div class="v-name">Científico</div><div class="v-desc">El CADIC como nodo de acceso para investigadores de todo el mundo. Cualquier programa puede enviar científicos a desarrollar tesis y proyectos con acceso a laboratorios y plataforma logística.</div><span class="v-tag">CADIC · CONICET · Tratado Antártico</span></div></div>
+      <div class="v-card"><img class="vector-img" src="imagenes/bhart9070-ship-2455240.jpg" alt=""><div class="v-deco-num">02</div><div class="v-body"><div class="v-num">Vector II</div><div class="v-name">Científico</div><div class="v-desc">El CADIC como nodo de acceso para investigadores de todo el mundo. Cualquier programa puede enviar científicos a desarrollar tesis y proyectos con acceso a laboratorios y plataforma logística.</div><span class="v-tag">CADIC · CONICET · Tratado Antártico</span></div></div>
       <div class="v-card"><img class="vector-img" src="imagenes/Base mambio con bandera de frente.png" alt=""><div class="v-deco-num">03</div><div class="v-body"><div class="v-num">Vector III</div><div class="v-name">Educativo y Académico</div><div class="v-desc">La UNTDF como polo de captación de estudiantes de posgrado del mundo entero interesados en la investigación antártica. La universidad de la Antártida, en el lugar más cercano al continente.</div><span class="v-tag">UNTDF · Ley 585/03 Art. 10</span></div></div>
-      <div class="v-card"><img class="vector-img" src="imagenes/matthew-stephenson-Pr4X8mqN0X4-unsplash.jpeg" alt=""><div class="v-deco-num">04</div><div class="v-body"><div class="v-num">Vector IV</div><div class="v-name">Soberanía Operativa</div><div class="v-desc">El aeropuerto de Base Petrel —única pista argentina en la Antártida apta para aeronaves de ala fija— como infraestructura civil abierta a todos los programas del sistema antártico. Refuerzo SAR humanitario en el Drake. COCOANTAR con base fueguina. Soberanía que se ejerce operando, no solo declarando.</div><span class="v-tag">Armada Argentina · COCOANTAR · Base Petrel · SAR Drake</span></div></div>
+      <div class="v-card"><img class="vector-img" src="imagenes/matthew-stephenson-Pr4X8mqN0X4-unsplash.jpg" alt=""><div class="v-deco-num">04</div><div class="v-body"><div class="v-num">Vector IV</div><div class="v-name">Soberanía Operativa</div><div class="v-desc">El aeropuerto de Base Petrel —única pista argentina en la Antártida apta para aeronaves de ala fija— como infraestructura civil abierta a todos los programas del sistema antártico. Refuerzo SAR humanitario en el Drake. COCOANTAR con base fueguina. Soberanía que se ejerce operando, no solo declarando.</div><span class="v-tag">Armada Argentina · COCOANTAR · Base Petrel · SAR Drake</span></div></div>
       <div class="v-card"><img class="vector-img" src="imagenes/barco.png" alt=""><div class="v-deco-num">05</div><div class="v-body"><div class="v-num">Vector V</div><div class="v-name">Institucional y Comercial</div><div class="v-desc">Unidad de diseño, captación y venta de servicios a programas antárticos del mundo, a través de la red de embajadas argentinas. Equipo integrado: perfil comercial + científico + logístico.</div><span class="v-tag">Cancillería · Puerto Ushuaia · COMNAP · SCAR · IAATO</span></div></div>
       <div class="v-card"><img class="vector-img" src="imagenes/avion chico.png" alt=""><div class="v-deco-num">06</div><div class="v-body"><div class="v-num">Vector VI</div><div class="v-name">Plataforma Operativa Internacional</div><div class="v-desc">Ushuaia como sede de coordinación regional: anfitrión de reuniones del sistema del Tratado Antártico, plataforma para acuerdos bilaterales y nodo de referencia para programas sin infraestructura propia.</div><span class="v-tag">Tratado Antártico · COMNAP · SCAR · CCRVMA · ASOC</span></div></div>
-      <div class="v-card"><img class="vector-img" src="imagenes/pexels-agustina-dickson-22212404-21773581.jpeg" alt=""><div class="v-deco-num">07</div><div class="v-body"><div class="v-num">Vector VII</div><div class="v-name">Ambiental y de Sustentabilidad</div><div class="v-desc">Gestión de última milla para operaciones polares. Posicionamiento: operar desde Ushuaia no es solo más eficiente — es más responsable. Cuanto más cerca la base de operaciones, menor la huella acumulada.</div><span class="v-tag">Protocolo de Madrid · Gestión última milla</span></div></div>
+      <div class="v-card"><img class="vector-img" src="imagenes/pexels-agustina-dickson-22212404-21773581.jpg" alt=""><div class="v-deco-num">07</div><div class="v-body"><div class="v-num">Vector VII</div><div class="v-name">Ambiental y de Sustentabilidad</div><div class="v-desc">Gestión de última milla para operaciones polares. Posicionamiento: operar desde Ushuaia no es solo más eficiente — es más responsable. Cuanto más cerca la base de operaciones, menor la huella acumulada.</div><span class="v-tag">Protocolo de Madrid · Gestión última milla</span></div></div>
       <div class="v-card"><img class="vector-img" src="imagenes/pexels-christian-pfeifer-3550788-5334316.jpg" alt=""><div class="v-deco-num">08</div><div class="v-body"><div class="v-num">Vector VIII</div><div class="v-name">Turístico y Expedicionario</div><div class="v-desc">El vector más desarrollado. Más de 122.000 visitantes en la temporada 2023-24 (IAATO). PAIX propone que la IAATO establezca en Ushuaia su sede regional de coordinación operativa.</div><span class="v-tag">IAATO · +122.000 visitantes/temporada</span></div></div>
       <div class="v-card"><img class="vector-img" src="imagenes/azorko-ushuaia-4073067_1920.jpg" alt=""><div class="v-deco-num">09</div><div class="v-body"><div class="v-num">Vector IX</div><div class="v-name">Plataforma Digital Integrada</div><div class="v-desc">La primera gateway antártica inteligente del mundo. Una plataforma de inteligencia territorial que integra en tiempo real la infraestructura disponible en Ushuaia —puerto, aeropuerto, laboratorios, combustible, proveedores, alojamiento— con variables ambientales y huella de carbono por operación. Cualquier programa del sistema antártico puede planificar, cotizar y ejecutar desde Ushuaia con precisión y trazabilidad. Ninguna gateway del mundo lo tiene. PAIX lo construye primero.</div><span class="v-tag">Smart Antarctic Gateway · Digital Twin · IA aplicada</span></div></div>
     </div>
@@ -349,6 +355,23 @@
     });
   }, { threshold: .12 });
   reveals.forEach(el => io.observe(el));
+
+  document.querySelectorAll('.v-card').forEach(card => {
+    const desc = card.querySelector('.v-desc');
+    if (!desc) return;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'v-more';
+    button.textContent = 'Ver más ···';
+
+    button.addEventListener('click', () => {
+      const open = card.classList.toggle('is-open');
+      button.textContent = open ? 'Ver menos' : 'Ver más ···';
+    });
+
+    desc.insertAdjacentElement('afterend', button);
+  });
 </script>
 </body>
 </html>
