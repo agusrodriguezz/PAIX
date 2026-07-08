@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="PAIX es la Plataforma Antártica Internacional Ushuaia: una iniciativa para consolidar a Ushuaia como hub logístico, científico, académico e institucional hacia la Antártida." />
   <meta name="theme-color" content="#EAF7FD" />
-  <link rel="icon" href="imagenes/logo.ico" type="image/x-icon" />
-  <link rel="shortcut icon" href="imagenes/logo.ico" type="image/x-icon" />
+  <link rel="icon" href="/imagenes/logo.ico" type="image/x-icon" sizes="any" />
+  <link rel="shortcut icon" href="/imagenes/logo.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/imagenes/logo.ico" />
   <meta property="og:title" content="PAIX — Plataforma Antártica Internacional Ushuaia" />
   <meta property="og:description" content="La plataforma que impulsa a Ushuaia como puerta internacional hacia la Antártida." />
   <meta property="og:type" content="website" />
@@ -50,7 +51,8 @@
       transition:.3s var(--ease);
     }
     .nav.scrolled{box-shadow:0 16px 50px rgba(23,75,106,.12)}
-    .nav-logo{font-weight:900;letter-spacing:.28em;color:var(--ink)}
+    .nav-logo{font-weight:900;letter-spacing:.28em;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;padding:.42rem .58rem;border-radius:999px;transition:background .22s var(--ease),color .22s var(--ease),transform .22s var(--ease)}
+    .nav-logo:hover{background:rgba(47,159,212,.10);color:var(--ocean);transform:translateY(-1px)}
     .nav-links{display:flex;align-items:center;gap:1.4rem}
     .nav-links a{
       text-decoration:none;text-transform:uppercase;font-size:.68rem;
@@ -171,13 +173,14 @@
     .cta-photo{aspect-ratio:1/1}
     .cta-email{display:inline-block;margin-top:2rem;text-decoration:none;text-transform:uppercase;font-weight:900;letter-spacing:.14em;padding:.95rem 1.5rem}
 
-    footer{padding:4rem clamp(1.5rem,5vw,3.5rem);background:#F8FDFF;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:2rem}
-    .footer-logo{font-size:4rem;font-weight:950;color:rgba(47,159,212,.14)}
-    .footer-main{line-height:1.8;color:rgba(23,75,106,.62)}
-    .footer-main strong{color:var(--ink)}
-    .footer-legal{margin-top:1.3rem;padding-top:1.3rem;border-top:1px solid var(--line);font-size:.78rem;color:rgba(23,75,106,.42);max-width:760px}
-    .footer-chamber{display:flex;align-items:center;gap:.9rem;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--line);color:rgba(23,75,106,.72);font-size:.82rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-    .footer-chamber img{width:150px;height:auto;display:block;object-fit:contain}
+    footer{padding:4.5rem clamp(1.5rem,5vw,3.5rem);background:linear-gradient(135deg,#F8FDFF 0%,#EEF9FE 100%);border-top:1px solid var(--line);display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,5vw,5rem);align-items:center;position:relative;overflow:hidden}
+    footer::before{content:"";position:absolute;left:-8rem;bottom:-10rem;width:28rem;height:28rem;border-radius:999px;background:radial-gradient(circle,rgba(110,200,242,.20),transparent 68%);pointer-events:none}
+    .footer-logo{font-size:clamp(4rem,9vw,8rem);line-height:.85;font-weight:950;letter-spacing:.08em;color:rgba(47,159,212,.13);position:relative;z-index:1}
+    .footer-main{line-height:1.8;color:rgba(23,75,106,.62);position:relative;z-index:1}
+    .footer-main strong{color:var(--ink);font-size:1.1rem}
+    .footer-legal{margin-top:1.4rem;padding:1.15rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:.78rem;color:rgba(23,75,106,.46);max-width:900px}
+    .footer-chamber{display:flex;align-items:center;gap:1rem;margin-top:1.4rem;color:rgba(23,75,106,.78);font-size:.78rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+    .footer-chamber img{width:92px;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 10px 24px rgba(23,75,106,.10))}
 
     .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
     .reveal.visible{opacity:1;transform:none}
@@ -197,7 +200,8 @@
       .photo-grid{grid-auto-rows:320px}
       .banner-polar img,.closing-banner img{height:280px}
       .stat{border-right:0;border-bottom:1px solid var(--line)}
-      footer{flex-direction:column}
+      footer{grid-template-columns:1fr}
+      .footer-chamber{align-items:flex-start;flex-direction:column}
     }
   </style>
 </head>
