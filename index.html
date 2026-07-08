@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="PAIX es la Plataforma Antártica Internacional Ushuaia: una iniciativa para consolidar a Ushuaia como hub logístico, científico, académico e institucional hacia la Antártida." />
   <meta name="theme-color" content="#EAF7FD" />
+  <link rel="icon" href="imagenes/logo.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="imagenes/logo.ico" type="image/x-icon" />
   <meta property="og:title" content="PAIX — Plataforma Antártica Internacional Ushuaia" />
   <meta property="og:description" content="La plataforma que impulsa a Ushuaia como puerta internacional hacia la Antártida." />
   <meta property="og:type" content="website" />
@@ -174,6 +176,8 @@
     .footer-main{line-height:1.8;color:rgba(23,75,106,.62)}
     .footer-main strong{color:var(--ink)}
     .footer-legal{margin-top:1.3rem;padding-top:1.3rem;border-top:1px solid var(--line);font-size:.78rem;color:rgba(23,75,106,.42);max-width:760px}
+    .footer-chamber{display:flex;align-items:center;gap:.9rem;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--line);color:rgba(23,75,106,.72);font-size:.82rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .footer-chamber img{width:150px;height:auto;display:block;object-fit:contain}
 
     .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
     .reveal.visible{opacity:1;transform:none}
@@ -202,7 +206,7 @@
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
 <nav class="nav" id="nav">
-  <div class="nav-logo">PAIX</div>
+  <a class="nav-logo" href="#contenido" aria-label="Volver a la portada">PAIX</a>
   <div class="nav-links">
     <a href="#marca">La Marca</a>
     <a href="#normativa">Marco Normativo</a>
@@ -256,7 +260,7 @@
     </div>
 
     <div class="photo-grid">
-      <figure class="photo-tile large reveal"><img src="imagenes/images.jpeg" alt="Buque rompehielos operando en hielo antártico"><figcaption>Conectividad marítima</figcaption></figure>
+      <figure class="photo-tile large reveal"><img src="imagenes/images.jpeg  " alt="Buque rompehielos operando en hielo antártico"><figcaption>Conectividad marítima</figcaption></figure>
       <figure class="photo-tile reveal d1"><img src="imagenes/avion-antartida-k8EI-U601176386894Z0H-1200x840@abc.webp" alt="Avión de transporte operando en pista antártica"><figcaption>Operación aérea</figcaption></figure>
       <figure class="photo-tile reveal d2"><img src="imagenes/10871402-helicopter-5602410_1920.jpg" alt="Helicóptero argentino operando en territorio antártico"><figcaption>Soporte táctico</figcaption></figure>
       <figure class="photo-tile reveal d1"><img src="imagenes/27-12-2022nubesdegasesindustrialesque_1000_1100.jpg" alt="Equipo científico realizando tareas de campo en la Antártida"><figcaption>Ciencia en terreno</figcaption></figure>
@@ -335,8 +339,11 @@
       <a href="mailto:alo@paix.ar">alo@paix.ar</a>
     </div>
     <div class="footer-legal">
-      Marco normativo: Ley Nacional 23.775/90 · Ley Provincial TDF 585/03 · Ley Provincial TDF 640/04 · Ley Nacional 19.640<br>
-      Documento conceptual v1.1 — Julio 2026 · Uso interno y presentaciones institucionales
+      Marco normativo: Ley Nacional 23.775/90 · Ley Provincial TDF 585/03 · Ley Provincial TDF 640/04 · Ley Nacional 19.640
+    </div>
+    <div class="footer-chamber">
+      <img src="imagenes/logo_camara.png" alt="Cámara de Comercio Ushuaia">
+      <span>Impulsa Cámara de Comercio Ushuaia</span>
     </div>
   </div>
 </footer>
