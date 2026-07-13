@@ -69,6 +69,7 @@
     }
     img{max-width:100%}
     a{color:inherit}
+    .svg-defs{position:absolute;width:0;height:0;overflow:hidden}
     .skip-link{position:absolute;left:-999px;top:1rem;z-index:999;background:#fff;padding:.7rem 1rem;border-radius:999px}
     .skip-link:focus{left:1rem}
 
@@ -84,7 +85,7 @@
     .nav.scrolled{box-shadow:0 16px 50px rgba(23,75,106,.12)}
     .nav-logo{font-weight:900;letter-spacing:.28em;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;padding:.42rem .58rem;border-radius:999px;transition:background .22s var(--ease),color .22s var(--ease),transform .22s var(--ease)}
     .nav-logo:hover{background:rgba(47,159,212,.10);color:var(--ocean);transform:translateY(-1px)}
-    .nav-links{display:flex;align-items:center;gap:1.4rem}
+    .nav-links{display:flex;align-items:center;gap:clamp(.85rem,1.8vw,1.4rem)}
     .nav-links a{
       text-decoration:none;text-transform:uppercase;font-size:.68rem;
       letter-spacing:.13em;font-weight:800;color:rgba(23,75,106,.62);
@@ -204,14 +205,371 @@
     .cta-photo{aspect-ratio:1/1}
     .cta-email{display:inline-block;margin-top:2rem;text-decoration:none;text-transform:uppercase;font-weight:900;letter-spacing:.14em;padding:.95rem 1.5rem}
 
-    footer{padding:4.5rem clamp(1.5rem,5vw,3.5rem);background:linear-gradient(135deg,#F8FDFF 0%,#EEF9FE 100%);border-top:1px solid var(--line);display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,5vw,5rem);align-items:center;position:relative;overflow:hidden}
-    footer::before{content:"";position:absolute;left:-8rem;bottom:-10rem;width:28rem;height:28rem;border-radius:999px;background:radial-gradient(circle,rgba(110,200,242,.20),transparent 68%);pointer-events:none}
-    .footer-logo{font-size:clamp(4rem,9vw,8rem);line-height:.85;font-weight:950;letter-spacing:.08em;color:rgba(47,159,212,.13);position:relative;z-index:1}
-    .footer-main{line-height:1.8;color:rgba(23,75,106,.62);position:relative;z-index:1}
-    .footer-main strong{color:var(--ink);font-size:1.1rem}
-    .footer-legal{margin-top:1.4rem;padding:1.15rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:.78rem;color:rgba(23,75,106,.46);max-width:900px}
-    .footer-chamber{display:flex;align-items:center;gap:1rem;margin-top:1.4rem;color:rgba(23,75,106,.78);font-size:.78rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
-    .footer-chamber img{width:92px;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 10px 24px rgba(23,75,106,.10))}
+    .prensa{
+      position:relative;
+      padding:clamp(5.5rem,9vw,8.5rem) 0;
+      background:
+        linear-gradient(180deg,rgba(248,253,255,.92),rgba(255,255,255,.98) 44%,rgba(227,245,252,.92));
+      border-top:1px solid var(--line);
+      overflow:hidden;
+    }
+    .prensa::before{
+      content:"";
+      display:none;
+    }
+    .prensa-inner{
+      width:min(1180px,calc(100% - 3rem));
+      margin:0 auto;
+      position:relative;
+      z-index:1;
+    }
+    .prensa-header{
+      display:grid;
+      grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);
+      gap:clamp(2rem,5vw,5rem);
+      align-items:end;
+    }
+    .prensa-lead{
+      max-width:560px;
+      justify-self:end;
+      font-size:clamp(1.05rem,1.7vw,1.32rem);
+      line-height:1.75;
+      color:rgba(23,75,106,.68);
+    }
+    .press-filters{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.65rem;
+      margin-top:clamp(2.2rem,4vw,3.2rem);
+    }
+    .press-filter{
+      appearance:none;
+      border:1px solid rgba(47,159,212,.20);
+      background:rgba(255,255,255,.72);
+      color:rgba(23,75,106,.66);
+      border-radius:999px;
+      padding:.72rem 1rem;
+      font:inherit;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+      cursor:pointer;
+      box-shadow:0 12px 30px rgba(23,75,106,.05);
+      transition:background .24s var(--ease),border-color .24s var(--ease),color .24s var(--ease),box-shadow .24s var(--ease),transform .24s var(--ease);
+    }
+    .press-filter:hover{
+      transform:translateY(-1px);
+      border-color:rgba(47,159,212,.38);
+      color:var(--ocean);
+      box-shadow:0 16px 36px rgba(23,75,106,.09);
+    }
+    .press-filter.is-active{
+      color:#fff;
+      border-color:transparent;
+      background:linear-gradient(135deg,var(--sky),var(--ocean));
+      box-shadow:0 18px 38px rgba(47,159,212,.22);
+    }
+    .media-carousel{
+      position:relative;
+      margin-top:1.8rem;
+    }
+    .media-track{
+      display:flex;
+      gap:1.05rem;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      scroll-behavior:smooth;
+      scroll-padding:0;
+      padding:.8rem 0 2.35rem;
+      cursor:grab;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .media-track::-webkit-scrollbar{display:none}
+    .media-track.is-dragging{
+      cursor:grabbing;
+      scroll-snap-type:none;
+      scroll-behavior:auto;
+      user-select:none;
+    }
+    .news-card{
+      flex:0 0 clamp(292px,30vw,378px);
+      min-height:365px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:1.7rem;
+      scroll-snap-align:start;
+      border:1px solid rgba(47,159,212,.16);
+      border-radius:26px;
+      background:linear-gradient(160deg,rgba(255,255,255,.94),rgba(234,247,253,.74));
+      box-shadow:0 22px 56px rgba(23,75,106,.10);
+      padding:1.45rem;
+      position:relative;
+      overflow:hidden;
+      animation:newsIn .52s var(--ease) both;
+      transition:transform .28s var(--ease),box-shadow .28s var(--ease),border-color .28s var(--ease);
+    }
+    .news-card::before{
+      content:"";
+      position:absolute;
+      left:1.45rem;
+      right:1.45rem;
+      top:0;
+      height:3px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--sky),rgba(47,159,212,.16));
+    }
+    .news-card:hover{
+      transform:translateY(-5px);
+      border-color:rgba(47,159,212,.30);
+      box-shadow:0 30px 70px rgba(23,75,106,.15);
+    }
+    .news-meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      margin-bottom:1.45rem;
+      font-size:.68rem;
+      line-height:1.35;
+      font-weight:950;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+    }
+    .news-source{color:var(--ocean)}
+    .news-date{
+      color:rgba(23,75,106,.46);
+      text-align:right;
+    }
+    .news-category{
+      display:inline-flex;
+      align-items:center;
+      width:max-content;
+      max-width:100%;
+      padding:.45rem .68rem;
+      border-radius:999px;
+      background:rgba(47,159,212,.10);
+      color:rgba(23,75,106,.62);
+      font-size:.62rem;
+      font-weight:950;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      margin-bottom:1rem;
+    }
+    .news-title{
+      color:var(--ink);
+      font-size:clamp(1.25rem,1.7vw,1.55rem);
+      line-height:1.12;
+      letter-spacing:-.035em;
+      max-width:95%;
+    }
+    .news-summary{
+      margin-top:1rem;
+      color:rgba(23,75,106,.66);
+      line-height:1.68;
+      font-size:.95rem;
+    }
+    .news-link{
+      width:max-content;
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      text-decoration:none;
+      border-radius:999px;
+      padding:.78rem 1rem;
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(47,159,212,.18);
+      color:var(--ink);
+      font-size:.72rem;
+      font-weight:950;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+      box-shadow:0 12px 28px rgba(23,75,106,.07);
+      transition:background .24s var(--ease),color .24s var(--ease),border-color .24s var(--ease),transform .24s var(--ease),box-shadow .24s var(--ease);
+    }
+    .news-link:hover{
+      transform:translateY(-1px);
+      background:var(--ink);
+      color:#fff;
+      border-color:var(--ink);
+      box-shadow:0 18px 34px rgba(23,75,106,.16);
+    }
+    .media-arrow{
+      position:absolute;
+      top:50%;
+      z-index:2;
+      width:46px;
+      height:46px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(47,159,212,.20);
+      border-radius:999px;
+      background:rgba(255,255,255,.82);
+      color:var(--ink);
+      font-size:1.7rem;
+      line-height:1;
+      cursor:pointer;
+      box-shadow:0 18px 42px rgba(23,75,106,.13);
+      backdrop-filter:blur(14px);
+      transition:transform .24s var(--ease),background .24s var(--ease),color .24s var(--ease),box-shadow .24s var(--ease);
+    }
+    .media-arrow:hover{
+      background:var(--ink);
+      color:#fff;
+      box-shadow:0 22px 48px rgba(23,75,106,.18);
+    }
+    .media-arrow.prev{left:-1.35rem;transform:translateY(-50%)}
+    .media-arrow.next{right:-1.35rem;transform:translateY(-50%)}
+    .media-arrow.prev:hover{transform:translate(-2px,-50%)}
+    .media-arrow.next:hover{transform:translate(2px,-50%)}
+    .news-empty{
+      min-height:220px;
+      width:100%;
+      display:grid;
+      place-items:center;
+      border:1px dashed rgba(47,159,212,.22);
+      border-radius:24px;
+      color:rgba(23,75,106,.56);
+      font-weight:850;
+      background:rgba(255,255,255,.58);
+    }
+
+    footer{
+      background:linear-gradient(180deg,#F8FDFF 0%,#EDF8FD 100%);
+      border-top:1px solid var(--line);
+      position:relative;
+      overflow:hidden;
+    }
+    .footer-shell{
+      width:min(1180px,calc(100% - 3rem));
+      margin:0 auto;
+      padding:clamp(4.5rem,7vw,6.5rem) 0;
+      display:grid;
+      grid-template-columns:minmax(250px,.78fr) minmax(0,1.22fr);
+      gap:clamp(2.5rem,6vw,6rem);
+      align-items:start;
+    }
+    .footer-brand{
+      position:relative;
+      min-height:100%;
+      padding-right:clamp(1rem,3vw,2.5rem);
+    }
+    .footer-logo{
+      font-size:clamp(4.4rem,9vw,8rem);
+      line-height:.84;
+      font-weight:950;
+      letter-spacing:.08em;
+      color:rgba(47,159,212,.18);
+    }
+    .footer-tagline{
+      max-width:340px;
+      margin-top:1.2rem;
+      color:rgba(23,75,106,.64);
+      line-height:1.7;
+      font-weight:750;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:clamp(1.6rem,3vw,2.8rem);
+    }
+    .footer-block{
+      padding-top:1rem;
+      border-top:1px solid rgba(47,159,212,.18);
+    }
+    .footer-label{
+      display:block;
+      margin-bottom:.95rem;
+      color:var(--ocean);
+      font-size:.68rem;
+      font-weight:950;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .footer-main{
+      color:rgba(23,75,106,.66);
+      line-height:1.85;
+    }
+    .footer-main strong{
+      display:block;
+      margin-bottom:.35rem;
+      color:var(--ink);
+      font-size:1.08rem;
+      line-height:1.35;
+    }
+    .footer-main a{
+      color:var(--ink);
+      font-weight:850;
+      text-decoration:none;
+      border-bottom:1px solid rgba(47,159,212,.32);
+      transition:color .22s var(--ease),border-color .22s var(--ease);
+    }
+    .footer-main a:hover{
+      color:var(--ocean);
+      border-color:var(--ocean);
+    }
+    .social-buttons{
+      display:flex;
+      align-items:center;
+      gap:.85rem;
+    }
+    .social-button{
+      width:48px;
+      height:48px;
+      display:grid;
+      place-items:center;
+      border-radius:999px;
+      border:0;
+      background:transparent;
+      box-shadow:none;
+      transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease);
+    }
+    .social-button img{
+      width:36px;
+      height:36px;
+      display:block;
+      object-fit:contain;
+      border-radius:0;
+      filter:url(#socialIconClean);
+      transition:transform .25s var(--ease);
+    }
+    .social-button:hover{
+      transform:translateY(-3px);
+      background:rgba(255,255,255,.74);
+      border-color:transparent;
+      box-shadow:0 18px 34px rgba(23,75,106,.10);
+    }
+    .social-button:hover img{transform:scale(1.04)}
+    .footer-legal{
+      color:rgba(23,75,106,.56);
+      line-height:1.75;
+      font-size:.88rem;
+    }
+    .footer-chamber{
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      color:rgba(23,75,106,.78);
+      font-size:.78rem;
+      font-weight:950;
+      letter-spacing:.11em;
+      line-height:1.45;
+      text-transform:uppercase;
+    }
+    .footer-chamber img{
+      width:96px;
+      height:auto;
+      display:block;
+      object-fit:contain;
+      filter:drop-shadow(0 10px 24px rgba(23,75,106,.10));
+    }
+
+    @keyframes newsIn{
+      from{opacity:0;transform:translateY(16px)}
+      to{opacity:1;transform:none}
+    }
 
     .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
     .reveal.visible{opacity:1;transform:none}
@@ -222,6 +580,8 @@
       .v-grid{grid-template-columns:repeat(2,1fr)}
       .photo-grid{grid-template-columns:1fr 1fr}
       .photo-tile.large{grid-row:span 1}
+      .prensa-header,.footer-shell{grid-template-columns:1fr}
+      .prensa-lead{justify-self:start}
     }
     @media(max-width:768px){
       .nav-links{display:none}
@@ -231,7 +591,19 @@
       .photo-grid{grid-auto-rows:320px}
       .banner-polar img,.closing-banner img{height:280px}
       .stat{border-right:0;border-bottom:1px solid var(--line)}
+      .prensa-inner,.footer-shell{width:min(100% - 2rem,1180px)}
+      .press-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.5rem;scrollbar-width:none}
+      .press-filters::-webkit-scrollbar{display:none}
+      .press-filter{white-space:nowrap}
+      .media-track{margin:0 -1rem;padding:.7rem 1rem 4.6rem;scroll-padding-left:1rem}
+      .news-card{flex-basis:min(86vw,340px);min-height:350px;border-radius:22px}
+      .media-arrow{top:auto;bottom:1rem}
+      .media-arrow.prev{left:calc(50% - 3.25rem);transform:none}
+      .media-arrow.next{right:calc(50% - 3.25rem);transform:none}
+      .media-arrow.prev:hover{transform:translateX(-2px)}
+      .media-arrow.next:hover{transform:translateX(2px)}
       footer{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
       .footer-chamber{align-items:flex-start;flex-direction:column}
     }
   </style>
@@ -240,6 +612,23 @@
 <body>
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <filter id="socialIconClean" color-interpolation-filters="sRGB">
+    <feColorMatrix
+      in="SourceGraphic"
+      type="matrix"
+      values="0 0 0 0 0
+              0 0 0 0 0
+              0 0 0 0 0
+              -2 -2 -2 0 1.9"
+      result="darkPixels"
+    />
+    <feComponentTransfer in="darkPixels">
+      <feFuncA type="table" tableValues="0 0 0 1 1" />
+    </feComponentTransfer>
+  </filter>
+</svg>
+
 <nav class="nav" id="nav">
   <a class="nav-logo" href="#contenido" aria-label="Volver a la portada">PAIX</a>
   <div class="nav-links">
@@ -247,6 +636,7 @@
     <a href="#normativa">Marco Normativo</a>
     <a href="#vectores">Vectores</a>
     <a href="#operacion">Convocatoria</a>
+    <a href="#prensa">Medios</a>
     <a href="#contacto" class="nav-cta">Síntesis</a>
   </div>
 </nav>
@@ -295,7 +685,7 @@
     </div>
 
     <div class="photo-grid">
-      <figure class="photo-tile large reveal"><img src="imagenes/images.jpeg  " alt="Buque rompehielos operando en hielo antártico"><figcaption>Conectividad marítima</figcaption></figure>
+      <figure class="photo-tile large reveal"><img src="imagenes/Barco.webp" alt="Buque rompehielos operando en hielo antártico"><figcaption>Conectividad marítima</figcaption></figure>
       <figure class="photo-tile reveal d1"><img src="imagenes/avion-antartida-k8EI-U601176386894Z0H-1200x840@abc.webp" alt="Avión de transporte operando en pista antártica"><figcaption>Operación aérea</figcaption></figure>
       <figure class="photo-tile reveal d2"><img src="imagenes/10871402-helicopter-5602410_1920.jpg" alt="Helicóptero argentino operando en territorio antártico"><figcaption>Soporte táctico</figcaption></figure>
       <figure class="photo-tile reveal d1"><img src="imagenes/27-12-2022nubesdegasesindustrialesque_1000_1100.jpg" alt="Equipo científico realizando tareas de campo en la Antártida"><figcaption>Ciencia en terreno</figcaption></figure>
@@ -363,22 +753,78 @@
       <p class="section-body reveal d3" style="margin-top:1.2rem">Sus nueve vectores no compiten entre sí. Se potencian. El Vector I genera infraestructura que el Vector II necesita. El Vector III forma los recursos que el Vector I demanda. El Vector IV construye la soberanía que el Vector VI proyecta. El Vector V le da coherencia y capacidad comercial al conjunto. El Vector VII garantiza que todo se haga con responsabilidad sobre el ecosistema más frágil del planeta. El Vector VIII demuestra que la demanda ya existe y que el mundo sabe llegar. Y el Vector IX garantiza que toda esa operación sea trazable, eficiente y exportable como modelo al resto del sistema antártico.</p>
     </div>
   </section>
+
+  <section class="prensa" id="prensa" aria-labelledby="prensa-title">
+    <div class="prensa-inner">
+      <div class="prensa-header">
+        <div>
+          <span class="section-tag reveal">Centro de Prensa</span>
+          <h2 class="section-h reveal d1" id="prensa-title">PAIX en los medios</h2>
+          <div class="section-rule reveal d1"></div>
+        </div>
+        <p class="prensa-lead reveal d2">Noticias, artículos y acontecimientos que construyen la agenda antártica de Ushuaia.</p>
+      </div>
+
+      <div class="press-filters reveal d2" aria-label="Filtrar noticias">
+        <button class="press-filter is-active" type="button" data-filter="Todas" aria-pressed="true">Todas</button>
+        <button class="press-filter" type="button" data-filter="PAIX" aria-pressed="false">PAIX</button>
+        <button class="press-filter" type="button" data-filter="Polo Logístico" aria-pressed="false">Polo Logístico</button>
+        <button class="press-filter" type="button" data-filter="Base Petrel" aria-pressed="false">Base Petrel</button>
+        <button class="press-filter" type="button" data-filter="RAPAL" aria-pressed="false">RAPAL</button>
+        <button class="press-filter" type="button" data-filter="Internacional" aria-pressed="false">Internacional</button>
+        <button class="press-filter" type="button" data-filter="Opinión" aria-pressed="false">Opinión</button>
+      </div>
+
+      <div class="media-carousel reveal d3" aria-label="Carrusel de noticias">
+        <button class="media-arrow prev" type="button" data-carousel="prev" aria-label="Noticia anterior">‹</button>
+        <div class="media-track" id="newsTrack" tabindex="0" aria-live="polite"></div>
+        <button class="media-arrow next" type="button" data-carousel="next" aria-label="Noticia siguiente">›</button>
+      </div>
+    </div>
+  </section>
 </main>
 
-<footer>
-  <div class="footer-logo">PAIX</div>
-  <div>
-    <div class="footer-main">
-      <strong>Plataforma Antártica Internacional Ushuaia</strong><br>
-      Ushuaia, Tierra del Fuego, Argentina<br>
-      <a href="mailto:alo@paix.ar">alo@paix.ar</a>
+<footer class="site-footer">
+  <div class="footer-shell">
+    <div class="footer-brand">
+      <div class="footer-logo">PAIX</div>
+      <p class="footer-tagline">Plataforma Antártica Internacional Ushuaia: cooperación, logística, ciencia y presencia argentina hacia la Antártida.</p>
     </div>
-    <div class="footer-legal">
-      Marco normativo: Ley Nacional 23.775/90 · Ley Provincial TDF 585/03 · Ley Provincial TDF 640/04 · Ley Nacional 19.640
-    </div>
-    <div class="footer-chamber">
-      <img src="imagenes/logo_camara.png" alt="Cámara de Comercio Ushuaia">
-      <span>Impulsa Cámara de Comercio Ushuaia</span>
+
+    <div class="footer-grid">
+      <div class="footer-block">
+        <span class="footer-label">Institucional</span>
+        <div class="footer-main">
+          <strong>Plataforma Antártica Internacional Ushuaia</strong>
+          Ushuaia, Tierra del Fuego, Argentina<br>
+          <a href="mailto:alo@paix.ar">alo@paix.ar</a>
+        </div>
+      </div>
+
+      <div class="footer-block">
+        <span class="footer-label">Seguinos</span>
+        <div class="social-buttons">
+          <a class="social-button" href="https://www.linkedin.com/company/paixarg" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <img src="imagenes/LogoLin.png" alt="">
+          </a>
+          <a class="social-button" href="https://x.com/paixarg" target="_blank" rel="noopener noreferrer" aria-label="X">
+            <img src="imagenes/LogoX.jpeg" alt="">
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-block">
+        <span class="footer-label">Marco normativo</span>
+        <p class="footer-legal">Ley Nacional 23.775/90 · Ley Provincial TDF 585/03 · Ley Provincial TDF 640/04 · Ley Nacional 19.640</p>
+      </div>
+
+      <div class="footer-block">
+        <span class="footer-label">Impulsa</span>
+        <div class="footer-chamber">
+          <img src="imagenes/logo_camara.png" alt="Cámara de Comercio Ushuaia">
+          <span>Cámara de Comercio Ushuaia</span>
+        </div>
+      </div>
     </div>
   </div>
 </footer>
@@ -414,6 +860,273 @@
 
     desc.insertAdjacentElement('afterend', button);
   });
+
+  const noticias = [
+    {
+      medio: 'Sur54',
+      fecha: '8 de julio de 2026',
+      titulo: 'La Cámara de Comercio de Ushuaia presentó PAIX, la plataforma que busca potenciar el desarrollo antártico',
+      resumen: 'La Cámara de Comercio de Ushuaia presenta PAIX como plataforma para articular sector privado, agenda pública y desarrollo estratégico antártico.',
+      url: 'https://www.sur54.com/noticias/2026/07/08/126985-la-camara-de-comercio-de-ushuaia-presento-paix-la-plataforma-que-busca-potenciar-el-desarrollo-antartico',
+      categorias: ['PAIX']
+    },
+    {
+      medio: 'Ushuaia Noticias',
+      fecha: '3 de julio de 2026',
+      titulo: 'RAPAL debe consolidar a Ushuaia como centro de la actividad antártica',
+      resumen: 'El debate de RAPAL subraya que Ushuaia puede consolidarse como centro operativo, científico e institucional de la actividad antártica.',
+      url: 'https://www.ushuaianoticias.com/2026/07/03/rapal-debe-consolidar-a-ushuaia-como-centro-de-la-actividad-antartica/',
+      categorias: ['RAPAL', 'PAIX']
+    },
+    {
+      medio: 'Radio Universidad',
+      fecha: 'Julio de 2026',
+      titulo: 'Ushuaia-Petrel: el polo logístico antártico que puede cambiar la historia fueguina',
+      resumen: 'Una mirada sobre la oportunidad Ushuaia-Petrel, la articulación público-privada y el valor de convertir presencia antártica en desarrollo local.',
+      url: 'https://www.radiouniversidad.com.ar/ushuaia-petrel-el-polo-logistico-antartico-que-puede-cambiar-la-historia-fueguina/',
+      categorias: ['Polo Logístico', 'Base Petrel', 'Opinión']
+    },
+    {
+      medio: 'ArgenPorts',
+      fecha: '7 de noviembre de 2025',
+      titulo: 'Estados Unidos retira sus buques científicos antárticos y abre una oportunidad para Ushuaia',
+      resumen: 'El repliegue de buques científicos estadounidenses reordena la logística polar regional y proyecta una ventana para Ushuaia en el Atlántico Sur.',
+      url: 'https://argenports.com/nota/estados-unidos-retira-sus-buques-cientificos-antarticos-y-abre-una-oportunidad-para-ushuaia/',
+      categorias: ['Internacional', 'Polo Logístico']
+    },
+    {
+      medio: 'LA NACION',
+      fecha: '15 de febrero de 2026',
+      titulo: 'Hito antártico: realizan desde Ushuaia el primer vuelo comercial a la histórica Base Petrel',
+      resumen: 'El primer vuelo civil desde Ushuaia a Base Petrel abre una vía aérea concreta para apoyo, emergencias y operación antártica internacional.',
+      url: 'https://www.lanacion.com.ar/sociedad/hito-antartico-realizan-desde-ushuaia-el-primer-vuelo-comercial-a-la-historica-base-petrel-y-abren-nid15022026/',
+      categorias: ['Base Petrel', 'Polo Logístico']
+    },
+    {
+      medio: 'Gobierno de Tierra del Fuego',
+      fecha: '2 de enero de 2024',
+      titulo: 'Polo Logístico Antártico: Bulgaria elige Ushuaia como sostén logístico para su actividad antártica',
+      resumen: 'Bulgaria selecciona a Ushuaia como soporte logístico para su campaña antártica, señalando demanda internacional por servicios fueguinos.',
+      url: 'https://www.tierradelfuego.gob.ar/blog/2024/01/02/polo-logistico-antartico-bulgaria-elige-ushuaia-como-sosten-logistico-para-su-actividad-antartica/',
+      categorias: ['Polo Logístico', 'Internacional']
+    },
+    {
+      medio: 'Argentina.gob.ar',
+      fecha: '10 de abril de 2026',
+      titulo: 'Se completó la estructura del Módulo I de la Base Antártica Conjunta Petrel',
+      resumen: 'Avances de infraestructura en Petrel refuerzan la capacidad operativa argentina y el proceso de reactivación de la base.',
+      url: 'https://www.argentina.gob.ar/noticias/se-completo-la-estructura-del-modulo-i-de-la-base-antartica-conjunta-bac-petrel-y-se-avanzo',
+      categorias: ['Base Petrel']
+    },
+    {
+      medio: 'Zona Militar',
+      fecha: '29 de enero de 2026',
+      titulo: 'Base Naval Integrada de Ushuaia: estado y avance de uno de los proyectos estratégicos más importantes de la Argentina',
+      resumen: 'Análisis del estado de la Base Naval Integrada y el Polo Logístico Antártico como componentes de una estrategia austral de largo plazo.',
+      url: 'https://www.zona-militar.com/2026/01/29/base-naval-integrada-de-ushuaia-cuales-es-el-estado-y-avance-de-uno-de-los-proyectos-estrategicos-mas-importantes-de-la-argentina/',
+      categorias: ['Polo Logístico', 'Base Petrel', 'Opinión']
+    }
+  ];
+
+  const newsTrack = document.getElementById('newsTrack');
+  const filterButtons = document.querySelectorAll('.press-filter');
+  const carouselButtons = document.querySelectorAll('[data-carousel]');
+  let activeFilter = 'Todas';
+  let autoplayTimer;
+  let resumeTimer;
+  let autoplayPaused = false;
+  let isDraggingNews = false;
+  let dragStartX = 0;
+  let dragStartScroll = 0;
+  let dragMoved = false;
+
+  const pauseNewsAutoplay = () => {
+    autoplayPaused = true;
+    window.clearTimeout(resumeTimer);
+  };
+
+  const resumeNewsAutoplay = (delay = 0) => {
+    window.clearTimeout(resumeTimer);
+    resumeTimer = window.setTimeout(() => {
+      autoplayPaused = false;
+    }, delay);
+  };
+
+  const newsStep = () => {
+    const card = newsTrack.querySelector('.news-card');
+    if (!card) return 320;
+    const styles = window.getComputedStyle(newsTrack);
+    const gap = parseFloat(styles.columnGap || styles.gap) || 18;
+    return card.getBoundingClientRect().width + gap;
+  };
+
+  const scrollNews = direction => {
+    newsTrack.scrollBy({ left: direction * newsStep(), behavior: 'smooth' });
+  };
+
+  const createNewsCard = (noticia, index) => {
+    const card = document.createElement('article');
+    card.className = 'news-card';
+    card.style.animationDelay = `${Math.min(index * 70, 420)}ms`;
+
+    const content = document.createElement('div');
+    const meta = document.createElement('div');
+    meta.className = 'news-meta';
+
+    const source = document.createElement('span');
+    source.className = 'news-source';
+    source.textContent = noticia.medio;
+
+    const date = document.createElement('span');
+    date.className = 'news-date';
+    date.textContent = noticia.fecha;
+
+    const category = document.createElement('span');
+    category.className = 'news-category';
+    category.textContent = noticia.categorias[0];
+
+    const title = document.createElement('h3');
+    title.className = 'news-title';
+    title.textContent = noticia.titulo;
+
+    const summary = document.createElement('p');
+    summary.className = 'news-summary';
+    summary.textContent = noticia.resumen;
+
+    const link = document.createElement('a');
+    link.className = 'news-link';
+    link.href = noticia.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = 'Leer nota ↗';
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      event.stopPropagation();
+      const tab = window.open(noticia.url, '_blank', 'noopener,noreferrer');
+      if (tab) tab.opener = null;
+    });
+
+    meta.append(source, date);
+    content.append(meta, category, title, summary);
+    card.append(content, link);
+
+    return card;
+  };
+
+  const renderNoticias = () => {
+    if (!newsTrack) return;
+    newsTrack.replaceChildren();
+
+    const visibles = noticias.filter(noticia => activeFilter === 'Todas' || noticia.categorias.includes(activeFilter));
+
+    if (!visibles.length) {
+      const empty = document.createElement('div');
+      empty.className = 'news-empty';
+      empty.textContent = 'No hay notas para este filtro.';
+      newsTrack.append(empty);
+      return;
+    }
+
+    visibles.forEach((noticia, index) => {
+      newsTrack.append(createNewsCard(noticia, index));
+    });
+  };
+
+  const startNewsAutoplay = () => {
+    window.clearInterval(autoplayTimer);
+    autoplayTimer = window.setInterval(() => {
+      if (autoplayPaused || document.hidden || !newsTrack || newsTrack.scrollWidth <= newsTrack.clientWidth) return;
+
+      const nearEnd = newsTrack.scrollLeft + newsTrack.clientWidth >= newsTrack.scrollWidth - 8;
+      if (nearEnd) {
+        newsTrack.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        scrollNews(1);
+      }
+    }, 6200);
+  };
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      activeFilter = button.dataset.filter;
+      filterButtons.forEach(item => {
+        const isActive = item === button;
+        item.classList.toggle('is-active', isActive);
+        item.setAttribute('aria-pressed', String(isActive));
+      });
+      renderNoticias();
+      newsTrack.scrollTo({ left: 0, behavior: 'smooth' });
+      pauseNewsAutoplay();
+      resumeNewsAutoplay(4200);
+    });
+  });
+
+  carouselButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      scrollNews(button.dataset.carousel === 'next' ? 1 : -1);
+      pauseNewsAutoplay();
+      resumeNewsAutoplay(4200);
+    });
+  });
+
+  if (newsTrack) {
+    newsTrack.addEventListener('mouseenter', pauseNewsAutoplay);
+    newsTrack.addEventListener('mouseleave', () => resumeNewsAutoplay(900));
+    newsTrack.addEventListener('focusin', pauseNewsAutoplay);
+    newsTrack.addEventListener('focusout', () => resumeNewsAutoplay(900));
+
+    newsTrack.addEventListener('wheel', event => {
+      if (newsTrack.scrollWidth <= newsTrack.clientWidth || Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+      event.preventDefault();
+      newsTrack.scrollLeft += event.deltaY;
+      pauseNewsAutoplay();
+      resumeNewsAutoplay(3800);
+    }, { passive: false });
+
+    newsTrack.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'touch' || event.target.closest('a, button')) return;
+      isDraggingNews = true;
+      dragMoved = false;
+      dragStartX = event.pageX;
+      dragStartScroll = newsTrack.scrollLeft;
+      newsTrack.classList.add('is-dragging');
+      newsTrack.setPointerCapture(event.pointerId);
+      pauseNewsAutoplay();
+    });
+
+    newsTrack.addEventListener('pointermove', event => {
+      if (!isDraggingNews) return;
+      const distance = event.pageX - dragStartX;
+      if (Math.abs(distance) > 5) dragMoved = true;
+      newsTrack.scrollLeft = dragStartScroll - distance;
+    });
+
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(type => {
+      newsTrack.addEventListener(type, event => {
+        if (!isDraggingNews) return;
+        isDraggingNews = false;
+        newsTrack.classList.remove('is-dragging');
+        if (newsTrack.hasPointerCapture(event.pointerId)) {
+          newsTrack.releasePointerCapture(event.pointerId);
+        }
+        resumeNewsAutoplay(4200);
+      });
+    });
+
+    newsTrack.addEventListener('click', event => {
+      if (event.target.closest('.news-link')) {
+        dragMoved = false;
+        return;
+      }
+      if (!dragMoved) return;
+      event.preventDefault();
+      event.stopPropagation();
+      dragMoved = false;
+    }, true);
+  }
+
+  renderNoticias();
+  startNewsAutoplay();
 </script>
 </body>
 </html>
