@@ -326,6 +326,33 @@
       border-color:rgba(47,159,212,.30);
       box-shadow:0 30px 70px rgba(23,75,106,.15);
     }
+    .news-card--importante{
+      border-color:rgba(212,159,47,.38);
+      background:linear-gradient(160deg,#fffef8,#fff8e8);
+      box-shadow:0 22px 56px rgba(180,120,20,.12);
+    }
+    .news-card--importante::before{
+      background:linear-gradient(90deg,#f5c842,rgba(245,200,66,.18));
+    }
+    .news-card--importante:hover{
+      border-color:rgba(212,159,47,.55);
+      box-shadow:0 30px 70px rgba(180,120,20,.18);
+    }
+    .news-badge-importante{
+      display:inline-flex;
+      align-items:center;
+      gap:.35rem;
+      padding:.38rem .78rem;
+      border-radius:999px;
+      background:linear-gradient(135deg,#f5c842,#e8a820);
+      color:#5a3c00;
+      font-size:.6rem;
+      font-weight:950;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      margin-bottom:1.1rem;
+      box-shadow:0 4px 14px rgba(245,200,66,.35);
+    }
     .news-meta{
       display:flex;
       align-items:center;
@@ -863,6 +890,15 @@
 
   const noticias = [
     {
+      medio: 'Infofueguina',
+      fecha: '17 de septiembre de 2026',
+      titulo: 'Antártida: después de la base, falta el negocio para Ushuaia',
+      resumen: 'El Estado ya tiene cómo sostener su programa antártico. Atender a los programas del resto del mundo es la oportunidad del sector privado.',
+      url: 'https://www.infofueguina.com/opinion/2026/9/17/antartida-despues-de-la-base-falta-el-negocio-para-ushuaia-82156.html',
+      categorias: ['Opinión', 'Polo Logístico'],
+      importante: true
+    },
+    {
       medio: 'Sur54',
       fecha: '8 de julio de 2026',
       titulo: 'La Cámara de Comercio de Ushuaia presentó PAIX, la plataforma que busca potenciar el desarrollo antártico',
@@ -966,10 +1002,18 @@
 
   const createNewsCard = (noticia, index) => {
     const card = document.createElement('article');
-    card.className = 'news-card';
+    card.className = noticia.importante ? 'news-card news-card--importante' : 'news-card';
     card.style.animationDelay = `${Math.min(index * 70, 420)}ms`;
 
     const content = document.createElement('div');
+
+    if (noticia.importante) {
+      const badge = document.createElement('div');
+      badge.className = 'news-badge-importante';
+      badge.textContent = '★ IMPORTANTE';
+      content.appendChild(badge);
+    }
+
     const meta = document.createElement('div');
     meta.className = 'news-meta';
 
