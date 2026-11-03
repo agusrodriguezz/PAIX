@@ -324,6 +324,11 @@ input:focus,select:focus,textarea:focus{outline:3px solid var(--ink);outline-off
 .form-msg[hidden]{display:none}
 @media (min-width:980px){.reg{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:start}.disc{position:sticky;top:7rem}}
 
+/* Botón flotante */
+.fab{position:fixed;right:max(1rem,env(safe-area-inset-right));bottom:max(1rem,env(safe-area-inset-bottom));z-index:250;display:inline-flex;align-items:center;min-height:52px;padding:.9rem 1.4rem;border-radius:999px;background:var(--deep);color:#fff;border:2px solid var(--deep);font-size:.74rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase;text-decoration:none;box-shadow:0 14px 34px rgba(11,53,80,.28);transition:transform .2s var(--ease),opacity .2s,visibility .2s}
+.fab:hover{transform:translateY(-2px)}
+.fab.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+
 /* XIII · FOOTER */
 .site-footer{background:var(--ink);color:#E6F1F7;padding:3.5rem var(--pad) 2.5rem}
 .site-footer a{color:#fff}
@@ -351,7 +356,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid var(--ink);outline-off
     <a href="#fideicomisos"><span class="es">Fideicomisos</span><span class="en">Trusts</span></a>
     <a href="#demanda"><span class="es">Demanda</span><span class="en">Demand</span></a>
     <a href="#ruta"><span class="es">Hoja de ruta</span><span class="en">Roadmap</span></a>
-    <a href="#registro"><span class="es">Registro de interés</span><span class="en">Register interest</span></a>
+    <a href="#registro"><span class="es">Invertí en Ushuaia</span><span class="en">Invest in Ushuaia</span></a>
   </div>
   <div class="lang" role="group" aria-label="Idioma / Language">
     <button type="button" data-set-lang="es" aria-pressed="true" lang="es">ES</button>
@@ -753,6 +758,8 @@ input:focus,select:focus,textarea:focus{outline:3px solid var(--ink);outline-off
   </div>
 </footer>
 
+<a class="fab" id="fab" href="#registro"><span class="es">Invertí en Ushuaia</span><span class="en">Invest in Ushuaia</span></a>
+
 <script>
 (function(){
   var root=document.documentElement;
@@ -821,6 +828,10 @@ input:focus,select:focus,textarea:focus{outline:3px solid var(--ink);outline-off
   });
   relabel();
   document.querySelectorAll('[data-set-lang]').forEach(function(b){b.addEventListener('click',function(){relabel();off();});});
+
+  // Botón flotante: se oculta cuando ya estás viendo el registro
+  var fab=document.getElementById('fab'),reg=document.getElementById('registro');
+  if(fab&&reg&&'IntersectionObserver' in window){new IntersectionObserver(function(en){fab.classList.toggle('is-hidden',en[0].isIntersecting);},{threshold:0,rootMargin:'0px 0px -30% 0px'}).observe(reg);}
 
   // Formulario de registro
   var f=document.getElementById('regForm'),m=document.getElementById('formMsg');
