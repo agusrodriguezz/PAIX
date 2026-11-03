@@ -1,11 +1,11 @@
 // POST /api/registro — recibe el formulario de /inversion y lo envía por mail con Resend.
 // Variables de entorno (Vercel → Settings → Environment Variables):
 //   RESEND_API_KEY  (obligatoria)  clave de Resend
-//   RESEND_FROM     (opcional)     remitente, ej. "PAIX <registro@paix.ar>" (el dominio debe estar verificado en Resend)
+//   RESEND_FROM     (opcional)     remitente; por defecto "PAIX <alo@paix.ar>" (el dominio debe estar verificado en Resend)
 //   REGISTRO_TO     (opcional)     destino, por defecto inversion@paix.ar
 
 const TO_DEFAULT = 'inversion@paix.ar';
-const FROM_DEFAULT = 'PAIX <onboarding@resend.dev>';
+const FROM_DEFAULT = 'PAIX <alo@paix.ar>'; // el dominio paix.ar debe estar verificado en Resend
 const MAX = { nombre: 120, organizacion: 160, email: 160, pais: 80, tipo: 80, tamano: 80, mensaje: 4000 };
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
