@@ -838,13 +838,17 @@ input:focus,select:focus,textarea:focus{outline:3px solid var(--ink);outline-off
   f.addEventListener('submit',function(ev){ev.preventDefault();var e=L();
     if(!f.checkValidity()){m.hidden=false;m.textContent=e?'Please complete the required fields and accept the notice.':'Completá los campos obligatorios y aceptá el aviso.';var bad=f.querySelector(':invalid');if(bad)bad.focus();return;}
     var g=function(n){var el=f.elements[n];if(!el)return '';if(el.tagName==='SELECT'){return el.value?el.options[el.selectedIndex].text:'';}return el.value.trim();};
-    if(g('_honey'))return;
     var btn=f.querySelector('button[type=submit]');btn.disabled=true;
-    var data={nombre:g('nombre'),organizacion:g('organizacion'),email:g('email'),pais:g('pais'),tipo_de_organizacion:g('tipo'),tamano:g('tamano'),mensaje:g('mensaje'),acepta_aviso:'Sí (paix.ar/inversion, Ley 25.326)',idioma:e?'EN':'ES',_subject:'PAIX · Registro de interés — '+g('organizacion'),_replyto:g('email'),_template:'table',_captcha:'false'};
-    fetch('https://formsubmit.co/ajax/inversion@paix.ar',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){return r.json().catch(function(){return {};}).then(function(o){if(!r.ok||o.success==='false'||o.success===false)throw 0;});})
+    var data={nombre:g('nombre'),organizacion:g('organizacion'),email:g('email'),pais:g('pais'),tipo:g('tipo'),tamano:g('tamano'),mensaje:g('mensaje'),_honey:g('_honey'),consent:true,idioma:e?'EN':'ES'};
+    fetch('/api/registro',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){return r.json().catch(function(){return {};}).then(function(o){if(!r.ok||!o.ok){throw {status:r.status,msg:o.error||('http_'+r.status)};}});})
       .then(function(){f.reset();m.hidden=false;m.textContent=e?'Thanks, we received your registration. We will be in touch.':'Listo, recibimos tu registro. Te contactamos a la brevedad.';if(window.gtag)gtag('event','generate_lead',{event_category:'inversion'});})
-      .catch(function(){m.hidden=false;m.textContent=e?'We could not send the form. Please try again or write to inversion@paix.ar.':'No pudimos enviar el formulario. Probá de nuevo o escribinos a inversion@paix.ar.';})
+      .catch(function(err){
+        if(window.console)console.error('Registro de interés: no se pudo enviar',err);
+        var body=['Nombre / Name: '+data.nombre,'Organización / Organisation: '+data.organizacion,'Email: '+data.email,'País / Country: '+data.pais,'Tipo / Type: '+data.tipo_de_organizacion,'Tamaño / Size: '+data.tamano,'','Mensaje / Message:',data.mensaje].join('\n');
+        var a=document.createElement('a');a.href='mailto:inversion@paix.ar?subject='+encodeURIComponent((e?'Interest registration — ':'Registro de interés — ')+data.organizacion)+'&body='+encodeURIComponent(body);a.textContent=e?'Send it by email instead':'Enviar por correo';a.style.fontWeight='800';
+        m.hidden=false;m.textContent=(e?'We could not send the form automatically. ':'No pudimos enviar el formulario automáticamente. ')+(err&&err.msg?'['+err.msg+'] ':'');m.appendChild(a);m.appendChild(document.createTextNode('.'));
+      })
       .then(function(){btn.disabled=false;});
   });
 })();
