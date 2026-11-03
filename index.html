@@ -85,6 +85,7 @@
     .nav.scrolled{box-shadow:0 16px 50px rgba(23,75,106,.12)}
     .nav-logo{font-weight:900;letter-spacing:.28em;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;padding:.42rem .58rem;border-radius:999px;transition:background .22s var(--ease),color .22s var(--ease),transform .22s var(--ease)}
     .nav-logo:hover{background:rgba(47,159,212,.10);color:var(--ocean);transform:translateY(-1px)}
+    .nav-right{display:flex;align-items:center;gap:clamp(1rem,2.4vw,2rem)}
     .nav-links{display:flex;align-items:center;gap:clamp(.85rem,1.8vw,1.4rem)}
     .nav-links a{
       text-decoration:none;text-transform:uppercase;font-size:.68rem;
@@ -92,9 +93,12 @@
     }
     .nav-links a:hover{color:var(--ocean)}
     .nav-cta{
-      color:#fff!important;background:linear-gradient(135deg,var(--sky),var(--ocean));
-      padding:.65rem 1.25rem;border-radius:999px;box-shadow:0 12px 28px rgba(47,159,212,.25)
+      text-decoration:none;text-transform:uppercase;font-size:.68rem;letter-spacing:.13em;font-weight:800;white-space:nowrap;
+      color:#fff;background:linear-gradient(135deg,var(--sky),var(--ocean));
+      padding:.65rem 1.25rem;border-radius:999px;box-shadow:0 12px 28px rgba(47,159,212,.25);
+      transition:transform .22s var(--ease),box-shadow .22s var(--ease)
     }
+    .nav-cta:hover{transform:translateY(-1px);box-shadow:0 16px 34px rgba(47,159,212,.35)}
 
     .hero{
       min-height:100vh;position:relative;display:grid;place-items:center;
@@ -612,6 +616,7 @@
     }
     @media(max-width:768px){
       .nav-links{display:none}
+      .nav-cta{padding:.55rem 1rem;font-size:.62rem}
       .hero{padding-top:6rem}
       .hero-title{font-size:clamp(4rem,22vw,6rem)}
       .stats,.marca-grid,.v-grid,.law-grid,.photo-grid{grid-template-columns:1fr}
@@ -658,13 +663,16 @@
 
 <nav class="nav" id="nav">
   <a class="nav-logo" href="#contenido" aria-label="Volver a la portada">PAIX</a>
-  <div class="nav-links">
-    <a href="#operacion">Convocatoria</a>
-    <a href="#marca">La Marca</a>
-    <a href="#vectores">Vectores</a>
-    <a href="#normativa">Marco Normativo</a>
-    <a href="#contacto">Síntesis</a>
-    <a href="#prensa">Medios</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#operacion">Convocatoria</a>
+      <a href="#marca">La Marca</a>
+      <a href="#vectores">Vectores</a>
+      <a href="#normativa">Marco Normativo</a>
+      <a href="#contacto">Síntesis</a>
+      <a href="#prensa">Medios</a>
+    </div>
+    <a class="nav-cta" href="invertir.html">Invertí en Ushuaia</a>
   </div>
 </nav>
 
