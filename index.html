@@ -100,6 +100,9 @@
     }
     .nav-cta:hover{transform:translateY(-1px);box-shadow:0 16px 34px rgba(47,159,212,.35)}
 
+    .fab{position:fixed;right:max(1rem,env(safe-area-inset-right));bottom:max(1rem,env(safe-area-inset-bottom));z-index:60;display:inline-flex;align-items:center;min-height:52px;padding:.9rem 1.4rem;border-radius:999px;background:var(--deep);color:#fff;font-size:.74rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase;text-decoration:none;box-shadow:0 14px 34px rgba(11,53,80,.28);transition:transform .22s var(--ease),box-shadow .22s var(--ease)}
+    .fab:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(11,53,80,.34)}
+
     .hero{
       min-height:100vh;position:relative;display:grid;place-items:center;
       padding:7rem clamp(1.5rem,5vw,4rem) 4rem;isolation:isolate;overflow:hidden;
@@ -675,6 +678,8 @@
     <a class="nav-cta" href="/inversion">Invertí en Ushuaia</a>
   </div>
 </nav>
+
+<a class="fab" href="/inversion">Invertí en Ushuaia</a>
 
 <main id="contenido">
   <section class="hero" aria-labelledby="hero-title">
