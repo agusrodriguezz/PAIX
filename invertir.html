@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invertí en Ushuaia — PAIX</title>
+  <meta name="description" content="Dejanos tus datos y el equipo de PAIX se pone en contacto para conversar oportunidades de inversión en Ushuaia y su rol como puerta hacia la Antártida." />
+  <meta name="theme-color" content="#EAF7FD" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://paix.ar/invertir.html" />
+  <link rel="icon" href="/imagenes/logo.ico" type="image/x-icon" sizes="any" />
+
+  <style>
+    :root{
+      --ice:#F8FDFF;
+      --glacier:#E3F5FC;
+      --sky:#6EC8F2;
+      --ocean:#2F9FD4;
+      --deep:#174B6A;
+      --ink:#0B3550;
+      --muted:rgba(23,75,106,.68);
+      --line:rgba(47,159,212,.18);
+      --shadow:0 28px 80px rgba(23,75,106,.14);
+      --ease:cubic-bezier(.22,1,.36,1);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:linear-gradient(180deg,var(--ice),var(--glacier));
+      color:var(--deep);min-height:100vh;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit}
+
+    .nav{
+      position:fixed;top:0;left:0;right:0;z-index:50;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:1rem clamp(1.25rem,4vw,3.5rem);
+      background:rgba(248,253,255,.86);backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-logo{font-weight:900;letter-spacing:.28em;color:var(--ink);text-decoration:none;padding:.42rem .58rem;border-radius:999px;transition:background .22s var(--ease),color .22s var(--ease)}
+    .nav-logo:hover{background:rgba(47,159,212,.10);color:var(--ocean)}
+    .nav-back{text-decoration:none;text-transform:uppercase;font-size:.68rem;letter-spacing:.13em;font-weight:800;color:rgba(23,75,106,.62)}
+    .nav-back:hover{color:var(--ocean)}
+
+    main{width:min(720px,100% - 2.5rem);margin:0 auto;padding:7.5rem 0 5rem}
+    .tag{display:block;text-transform:uppercase;font-weight:900;letter-spacing:.22em;font-size:.72rem;color:var(--ocean);margin-bottom:1.2rem}
+    h1{font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.05;font-weight:900;color:var(--ink);letter-spacing:-.01em}
+    .lead{margin-top:1.2rem;font-size:1.1rem;line-height:1.65;color:rgba(23,75,106,.74);max-width:58ch}
+    .divider{width:84px;height:3px;background:var(--ocean);border-radius:999px;margin:1.8rem 0 2.2rem}
+
+    form{
+      background:rgba(255,255,255,.82);border:1px solid var(--line);border-radius:28px;
+      padding:clamp(1.4rem,4vw,2.4rem);box-shadow:var(--shadow);
+      display:grid;grid-template-columns:1fr 1fr;gap:1.2rem 1.1rem;
+    }
+    .field{display:flex;flex-direction:column;gap:.45rem}
+    .field.full{grid-column:1/-1}
+    label{font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:var(--deep)}
+    label .opt{font-weight:500;letter-spacing:.06em;text-transform:none;color:var(--muted)}
+    input,select,textarea{
+      font:inherit;font-size:1rem;color:var(--ink);
+      background:var(--ice);border:1px solid var(--line);border-radius:14px;
+      padding:.8rem .95rem;width:100%;
+      transition:border-color .2s var(--ease),box-shadow .2s var(--ease);
+    }
+    textarea{min-height:140px;resize:vertical;line-height:1.5}
+    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ocean);box-shadow:0 0 0 4px rgba(47,159,212,.16)}
+    .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+    .actions{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:.4rem}
+    button{
+      font:inherit;text-transform:uppercase;font-size:.78rem;letter-spacing:.13em;font-weight:800;cursor:pointer;
+      color:#fff;border:0;background:linear-gradient(135deg,var(--sky),var(--ocean));
+      padding:.95rem 1.8rem;border-radius:999px;box-shadow:0 12px 28px rgba(47,159,212,.25);
+      transition:transform .22s var(--ease),box-shadow .22s var(--ease),opacity .2s;
+    }
+    button:hover{transform:translateY(-1px);box-shadow:0 16px 34px rgba(47,159,212,.35)}
+    button:disabled{opacity:.6;cursor:wait;transform:none}
+    .note{font-size:.85rem;color:var(--muted);line-height:1.5}
+    .note a{color:var(--ocean)}
+
+    .status{grid-column:1/-1;border-radius:14px;padding:.9rem 1.1rem;font-size:.95rem;line-height:1.5;display:none}
+    .status.ok{display:block;background:rgba(47,159,212,.10);color:var(--ink);border:1px solid var(--line)}
+    .status.err{display:block;background:#fff4f2;color:#8a2b1c;border:1px solid #f1c9c2}
+
+    @media(max-width:600px){
+      form{grid-template-columns:1fr}
+      main{padding-top:6.5rem}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="nav-logo" href="index.html" aria-label="Volver a PAIX">PAIX</a>
+    <a class="nav-back" href="index.html">← Volver</a>
+  </nav>
+
+  <main>
+    <span class="tag">Inversiones</span>
+    <h1>Invertí en Ushuaia</h1>
+    <p class="lead">Contanos quién sos y qué te interesa. El equipo de PAIX recibe tu consulta y te escribe para conversar el siguiente paso.</p>
+    <div class="divider"></div>
+
+    <form id="form" novalidate>
+      <div class="field">
+        <label for="nombre">Nombre y apellido</label>
+        <input id="nombre" name="nombre" type="text" autocomplete="name" required />
+      </div>
+      <div class="field">
+        <label for="empresa">Empresa u organización <span class="opt">(opcional)</span></label>
+        <input id="empresa" name="empresa" type="text" autocomplete="organization" />
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for="telefono">Teléfono <span class="opt">(opcional)</span></label>
+        <input id="telefono" name="telefono" type="tel" autocomplete="tel" />
+      </div>
+      <div class="field">
+        <label for="pais">País</label>
+        <input id="pais" name="pais" type="text" autocomplete="country-name" required />
+      </div>
+      <div class="field">
+        <label for="tipo">Tipo de inversor</label>
+        <select id="tipo" name="tipo_de_inversor" required>
+          <option value="">Elegí una opción</option>
+          <option>Empresa</option>
+          <option>Fondo de inversión</option>
+          <option>Inversor individual</option>
+          <option>Organismo público o multilateral</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="interes">Área de interés</label>
+        <select id="interes" name="area_de_interes" required>
+          <option value="">Elegí una opción</option>
+          <option>Puerto y logística</option>
+          <option>Combustible y abastecimiento</option>
+          <option>Aeropuerto y transporte aéreo</option>
+          <option>Ciencia e investigación</option>
+          <option>Turismo antártico</option>
+          <option>Servicios y proveedores</option>
+          <option>Otra</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="monto">Monto estimado <span class="opt">(opcional)</span></label>
+        <select id="monto" name="monto_estimado">
+          <option value="">Prefiero conversarlo</option>
+          <option>Menos de USD 100.000</option>
+          <option>USD 100.000 – 1 millón</option>
+          <option>USD 1 – 10 millones</option>
+          <option>Más de USD 10 millones</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" required placeholder="Qué querés hacer, en qué plazos, qué necesitás de nuestra parte."></textarea>
+      </div>
+
+      <div class="hp" aria-hidden="true">
+        <label for="web">No completar</label>
+        <input id="web" name="_honey" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+
+      <div class="actions">
+        <button type="submit" id="send">Enviar consulta</button>
+        <span class="note">También podés escribirnos a <a href="mailto:inversiones@paix.ar">inversiones@paix.ar</a>.</span>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    const ENDPOINT = 'https://formsubmit.co/ajax/inversiones@paix.ar';
+    const form = document.getElementById('form');
+    const send = document.getElementById('send');
+    const status = document.getElementById('status');
+
+    function show(kind, msg){
+      status.className = 'status ' + kind;
+      status.textContent = msg;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      const data = Object.fromEntries(new FormData(form).entries());
+      if (data._honey) return; // bot
+
+      data._subject = 'PAIX · Nueva consulta de inversión — ' + data.nombre;
+      data._replyto = data.email;
+      data._template = 'table';
+      data._captcha = 'false';
+
+      send.disabled = true;
+      send.textContent = 'Enviando…';
+      status.className = 'status';
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const out = await res.json().catch(() => ({}));
+        if (!res.ok || out.success === 'false' || out.success === false) throw new Error('send failed');
+        form.reset();
+        show('ok', 'Listo, recibimos tu consulta. Te escribimos a la brevedad.');
+        if (window.gtag) gtag('event', 'generate_lead', { event_category: 'inversion' });
+      } catch (err) {
+        show('err', 'No pudimos enviar el formulario. Probá de nuevo o escribinos directo a inversiones@paix.ar.');
+      } finally {
+        send.disabled = false;
+        send.textContent = 'Enviar consulta';
+      }
+    });
+  </script>
+</body>
+</html>
